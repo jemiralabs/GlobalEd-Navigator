@@ -1,6 +1,7 @@
+
 "use client";
 
-import Link from "next/link";
+import Link from "link";
 import { usePathname } from "next/navigation";
 import { 
   Home, 
@@ -177,7 +178,7 @@ export function TopNav() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleLogout} className="rounded-xl cursor-pointer py-2.5 text-destructive focus:text-destructive focus:bg-destructive/5">
                     <div className="flex items-center gap-2">
-                      <LogOut size={16} /> Log out
+                      <LogOut size={16} /> Logout
                     </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

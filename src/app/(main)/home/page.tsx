@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
@@ -122,7 +123,7 @@ export default function HomePage() {
           <p className="text-muted-foreground text-sm font-medium italic">Phase 1 Admissions are Live!</p>
         </div>
         <div className="flex items-center gap-3">
-          {isLoggedIn && (
+          {isLoggedIn ? (
             <>
               <Link href="/profile/notifications" className="relative p-2 bg-white rounded-xl shadow-sm border border-secondary md:hidden">
                 <Bell size={20} className="text-muted-foreground" />
@@ -132,6 +133,12 @@ export default function HomePage() {
                 <img src="https://picsum.photos/seed/user1/100/100" alt="Avatar" className="w-full h-full object-cover" />
               </Link>
             </>
+          ) : (
+            <Link href="/login" className="md:hidden">
+              <Button variant="ghost" size="icon" className="rounded-xl border border-secondary">
+                <LogIn size={20} className="text-primary" />
+              </Button>
+            </Link>
           )}
         </div>
       </div>
@@ -242,10 +249,10 @@ export default function HomePage() {
           </button>
         </div>
         
-        <div className="flex overflow-x-auto gap-5 px-6 pb-6 no-scrollbar">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 pb-6">
           {filteredUniversities.map((uni) => (
-            <Link key={uni.id} href={`/universities/${uni.id}`} className="min-w-[280px] bg-white rounded-[2rem] overflow-hidden shadow-lg shadow-black/[0.02] border border-secondary/50 group">
-              <div className="relative h-36">
+            <Link key={uni.id} href={`/universities/${uni.id}`} className="bg-white rounded-[2rem] overflow-hidden shadow-lg shadow-black/[0.02] border border-secondary/50 group">
+              <div className="relative h-48">
                 <img src={uni.image} alt={uni.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                 <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-2.5 py-1 rounded-xl flex items-center gap-1 text-[11px] font-bold">
                   <Star size={12} className="fill-yellow-400 text-yellow-400" /> {uni.rating}
@@ -267,9 +274,10 @@ export default function HomePage() {
             </Link>
           ))}
           {filteredUniversities.length === 0 && (
-            <div className="w-full flex flex-col items-center justify-center py-10 opacity-40">
+            <div className="col-span-full flex flex-col items-center justify-center py-20 opacity-40">
               <Search size={40} className="mb-2" />
               <p className="font-bold text-sm">No matches found</p>
+              <Button variant="ghost" className="mt-2 text-primary font-bold" onClick={resetFilters}>Clear Filters</Button>
             </div>
           )}
         </div>

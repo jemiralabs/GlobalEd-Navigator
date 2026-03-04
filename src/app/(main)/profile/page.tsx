@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -80,7 +81,7 @@ export default function ProfilePage() {
           variant="ghost" 
           className="w-full h-14 rounded-2xl text-destructive hover:bg-destructive/5 hover:text-destructive font-bold"
         >
-          <LogOut size={20} className="mr-2" /> Logout Account
+          <LogOut size={20} className="mr-2" /> Logout
         </Button>
       </div>
     </div>
