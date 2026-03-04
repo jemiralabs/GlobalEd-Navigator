@@ -31,7 +31,7 @@ export default function ProfilePage() {
             <Settings size={14} />
           </div>
         </div>
-        <h2 className="text-2xl font-bold">Jemish Macwan</h2>
+        <h2 className="text-2xl font-bold">Jemira</h2>
         <p className="text-muted-foreground text-sm font-medium">B.Tech Student • India</p>
       </div>
 

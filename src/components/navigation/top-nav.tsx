@@ -157,15 +157,15 @@ export function TopNav() {
                   <Button variant="ghost" className="relative h-10 w-10 rounded-full border-2 border-white shadow-sm hover:scale-105 transition-transform">
                     <Avatar className="h-9 w-9">
                       <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
-                      <AvatarFallback>JM</AvatarFallback>
+                      <AvatarFallback>J</AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 mt-2 rounded-2xl p-2 shadow-2xl border-secondary" align="end" forceMount>
                   <DropdownMenuLabel className="font-normal p-4">
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-bold leading-none">Jemish Macwan</p>
-                      <p className="text-xs leading-none text-muted-foreground">jemish@example.com</p>
+                      <p className="text-sm font-bold leading-none">Jemira</p>
+                      <p className="text-xs leading-none text-muted-foreground">jemira@example.com</p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />

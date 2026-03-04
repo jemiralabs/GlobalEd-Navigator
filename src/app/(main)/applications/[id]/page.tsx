@@ -30,11 +30,11 @@ const APP_DETAILS: any = {
     appliedDate: "Feb 12, 2024",
     status: 1,
     personal: {
-      fullName: "Jemish Macwan",
+      fullName: "Jemira",
       aadhar: "XXXX-XXXX-9012",
-      gender: "Male",
+      gender: "Female",
       nationality: "Indian",
-      email: "jemish@example.com",
+      email: "jemira@example.com",
       phone: "+91 98765 43210",
       address: "Sector 5, Hiranandani, Mumbai, MH - 400076"
     },

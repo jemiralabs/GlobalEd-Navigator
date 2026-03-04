@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -29,10 +28,10 @@ export default function PersonalInfoPage() {
 
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label className="text-xs uppercase text-muted-foreground font-bold ml-1">Full Legal Name</Label>
+            <Label className="text-xs uppercase text-muted-foreground font-bold ml-1">Full Name</Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 text-primary" size={18} />
-              <Input defaultValue="Jemish Macwan" className="pl-10 h-12 rounded-xl bg-white border-none shadow-sm" />
+              <Input defaultValue="Jemira" className="pl-10 h-12 rounded-xl bg-white border-none shadow-sm" />
             </div>
           </div>
 
@@ -40,7 +39,7 @@ export default function PersonalInfoPage() {
             <Label className="text-xs uppercase text-muted-foreground font-bold ml-1">Email Address</Label>
             <div className="relative">
               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-primary" size={18} />
-              <Input defaultValue="jemish@example.com" className="pl-10 h-12 rounded-xl bg-white border-none shadow-sm" />
+              <Input defaultValue="jemira@example.com" className="pl-10 h-12 rounded-xl bg-white border-none shadow-sm" />
             </div>
           </div>
 

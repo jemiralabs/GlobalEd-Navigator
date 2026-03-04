@@ -93,7 +93,7 @@ export default function ApplicationForm() {
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label>Full Name (as per Aadhar)</Label>
-                <Input placeholder="John Doe" className="h-12 bg-white rounded-xl" />
+                <Input placeholder="Jemira" className="h-12 bg-white rounded-xl" />
               </div>
               <div className="space-y-2">
                 <Label>Aadhar Card Number</Label>
@@ -108,7 +108,7 @@ export default function ApplicationForm() {
               </div>
               <div className="space-y-2">
                 <Label>Gender</Label>
-                <RadioGroup defaultValue="male" className="flex gap-4">
+                <RadioGroup defaultValue="female" className="flex gap-4">
                   <div className="flex items-center space-x-2 bg-white p-3 rounded-xl border border-secondary flex-1">
                     <RadioGroupItem value="male" id="male" />
                     <Label htmlFor="male">Male</Label>
@@ -229,7 +229,7 @@ export default function ApplicationForm() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Full Name</span>
-                  <span className="font-medium text-right">Jemish Macwan</span>
+                  <span className="font-medium text-right">Jemira</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Documents</span>

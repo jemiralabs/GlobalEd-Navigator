@@ -117,7 +117,7 @@ export default function HomePage() {
       <div className="px-6 mb-8 flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold flex items-center gap-2">
-            {isLoggedIn ? "Hello, Jemish 👋" : "Hello, Student 👋"}
+            {isLoggedIn ? "Hello, Jemira 👋" : "Hello, Student 👋"}
           </h2>
           <p className="text-muted-foreground text-sm font-medium italic">Phase 1 Admissions are Live!</p>
         </div>
