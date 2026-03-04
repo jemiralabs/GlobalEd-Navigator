@@ -33,7 +33,7 @@ export function BottomNav() {
               href={item.href}
               className={cn(
                 "flex flex-col items-center gap-1 transition-all duration-300",
-                isActive ? "text-primary -translate-y-1" : "text-muted-foreground"
+                isActive ? "text-primary" : "text-muted-foreground"
               )}
             >
               <div className={cn(
