@@ -17,7 +17,7 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     localStorage.removeItem("userLoggedIn");
-    router.push("/home");
+    window.location.href = "/home";
   };
 
   return (
@@ -27,8 +27,9 @@ export default function ProfilePage() {
           <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-4 border-white shadow-xl">
             <img src="https://picsum.photos/seed/user1/200/200" alt="Profile" />
           </div>
-          <div className="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-xl shadow-lg border-2 border-white cursor-pointer hover:bg-primary/90 transition-colors">
-            <Camera size={14} />
+          {/* Upload New Image Logo (Camera) */}
+          <div className="absolute -bottom-2 -right-2 bg-primary text-white p-2.5 rounded-xl shadow-lg border-2 border-white cursor-pointer hover:bg-primary/90 transition-colors">
+            <Camera size={16} />
           </div>
         </div>
         <h2 className="text-2xl font-bold">Jemira</h2>
