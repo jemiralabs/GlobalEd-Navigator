@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Clock, MapPin, GraduationCap, MessageCircle, AlertCircle, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const applications = [
   {
@@ -37,7 +38,7 @@ export default function ApplicationsPage() {
   return (
     <div className="flex flex-col pt-12">
       <div className="px-6 mb-8">
-        <h2 className="text-2xl font-bold">My Applications</h2>
+        <h2 className="text-2xl font-bold text-foreground">My Applications</h2>
         <p className="text-muted-foreground text-sm">Track your progress in real-time</p>
       </div>
 
@@ -119,9 +120,11 @@ export default function ApplicationsPage() {
                     <MessageCircle size={16} className="mr-2" /> Advisor
                   </Button>
                 </div>
-                <Button className="w-full rounded-xl bg-secondary hover:bg-secondary/80 text-foreground font-bold h-12 shadow-none border border-black/5">
-                  View Full Details <ChevronRight size={16} className="ml-1" />
-                </Button>
+                <Link href={`/applications/${app.id}`} className="block w-full">
+                  <Button className="w-full rounded-xl bg-secondary hover:bg-secondary/80 text-foreground font-bold h-12 shadow-none border border-black/5">
+                    View Full Details <ChevronRight size={16} className="ml-1" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
