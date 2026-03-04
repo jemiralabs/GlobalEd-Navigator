@@ -16,7 +16,9 @@ import {
   BookOpen,
   X,
   Bell,
-  LogIn
+  LogIn,
+  Clock,
+  Zap
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -82,6 +84,45 @@ const universities = [
   }
 ];
 
+const popularCourses = [
+  {
+    id: "cs-iitb",
+    name: "Computer Science & Engineering",
+    university: "IIT Bombay",
+    duration: "4 Years",
+    fee: "₹2.2L/yr",
+    stream: "Engineering",
+    image: "https://picsum.photos/seed/cs1/400/250"
+  },
+  {
+    id: "mba-iima",
+    name: "MBA (PGP)",
+    university: "IIM Ahmedabad",
+    duration: "2 Years",
+    fee: "₹12L/yr",
+    stream: "Management",
+    image: "https://picsum.photos/seed/mba1/400/250"
+  },
+  {
+    id: "bcom-srcc",
+    name: "B.Com (Honours)",
+    university: "SRCC, Delhi University",
+    duration: "3 Years",
+    fee: "₹30K/yr",
+    stream: "Commerce",
+    image: "https://picsum.photos/seed/com1/400/250"
+  },
+  {
+    id: "mbbs-aiims",
+    name: "Bachelor of Medicine (MBBS)",
+    university: "AIIMS Delhi",
+    duration: "5.5 Years",
+    fee: "₹1.6K/yr",
+    stream: "Medical",
+    image: "https://picsum.photos/seed/med1/400/250"
+  }
+];
+
 export default function HomePage() {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -109,6 +150,15 @@ export default function HomePage() {
       return matchesSearch && matchesType && matchesStream;
     });
   }, [searchQuery, selectedType, selectedStream]);
+
+  const filteredCourses = useMemo(() => {
+    return popularCourses.filter((course) => {
+      const matchesSearch = course.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                           course.university.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesStream = selectedStream === "all" || course.stream === selectedStream;
+      return matchesSearch && matchesStream;
+    });
+  }, [searchQuery, selectedStream]);
 
   const activeFiltersCount = (selectedType !== "all" ? 1 : 0) + (selectedStream !== "all" ? 1 : 0);
 
@@ -149,7 +199,7 @@ export default function HomePage() {
           <div className="relative flex-1">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={20} />
             <Input 
-              placeholder="Search IITs, IIMs, DU..." 
+              placeholder="Search Courses, IITs, IIMs..." 
               className="pl-12 h-14 bg-white rounded-2xl border-secondary shadow-sm focus-visible:ring-primary"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -234,6 +284,50 @@ export default function HomePage() {
         )}
       </div>
 
+      {/* Popular Courses Section */}
+      <div className="mb-12">
+        <div className="px-6 flex justify-between items-center mb-6">
+          <div className="flex flex-col">
+            <h3 className="text-xl font-bold">Popular Courses</h3>
+            <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest">Quick Apply Programs</p>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-6">
+          {filteredCourses.map((course) => (
+            <div key={course.id} className="bg-white rounded-[2rem] overflow-hidden border border-secondary shadow-sm flex flex-col group">
+              <div className="relative h-32">
+                <img src={course.image} alt={course.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                <div className="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-lg text-[10px] font-bold text-primary flex items-center gap-1">
+                  <Zap size={10} className="fill-primary" /> HOT
+                </div>
+              </div>
+              <div className="p-4 flex flex-col flex-1">
+                <div className="mb-3">
+                  <h4 className="font-bold text-sm line-clamp-1">{course.name}</h4>
+                  <p className="text-[10px] text-muted-foreground font-medium">{course.university}</p>
+                </div>
+                
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground font-bold">
+                    <Clock size={12} className="text-primary" /> {course.duration}
+                  </div>
+                  <div className="text-[10px] font-black text-foreground">
+                    {course.fee}
+                  </div>
+                </div>
+
+                <Link href="/apply" className="mt-auto">
+                  <Button className="w-full h-10 rounded-xl bg-primary hover:bg-primary/90 text-xs font-bold shadow-lg shadow-primary/10">
+                    Quick Apply
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Featured NIRF Ranked Section */}
       <div className="mb-10">
         <div className="px-6 flex justify-between items-center mb-6">
@@ -273,7 +367,7 @@ export default function HomePage() {
               </div>
             </Link>
           ))}
-          {filteredUniversities.length === 0 && (
+          {(filteredUniversities.length === 0 && filteredCourses.length === 0) && (
             <div className="col-span-full flex flex-col items-center justify-center py-20 opacity-40">
               <Search size={40} className="mb-2" />
               <p className="font-bold text-sm">No matches found</p>
