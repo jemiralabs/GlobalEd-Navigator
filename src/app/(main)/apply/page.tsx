@@ -7,7 +7,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, CheckCircle2, Upload, FileText, ChevronRight, GraduationCap, Loader2 } from "lucide-react";
+import { 
+  ArrowLeft, 
+  CheckCircle2, 
+  Upload, 
+  FileText, 
+  ChevronRight, 
+  GraduationCap, 
+  Loader2,
+  Fingerprint
+} from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { DocumentGuidanceCard } from "@/components/ai/document-guidance-card";
 import { cn } from "@/lib/utils";
@@ -48,7 +57,7 @@ export default function ApplicationForm() {
           <CheckCircle2 className="w-20 h-20 text-primary animate-bounce" />
         </div>
         <h2 className="text-2xl font-bold mb-2 text-center">Application Submitted!</h2>
-        <p className="text-muted-foreground text-center">Your application to Stanford University has been received. Redirecting to tracking screen...</p>
+        <p className="text-muted-foreground text-center">Your application to IIT Bombay has been received. Redirecting to tracking screen...</p>
       </div>
     );
   }
@@ -60,7 +69,7 @@ export default function ApplicationForm() {
           <ArrowLeft size={24} />
         </button>
         <div>
-          <h2 className="text-xl font-bold">Apply Now</h2>
+          <h2 className="text-xl font-bold">University Application</h2>
           <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Step {step} of {totalSteps}</p>
         </div>
       </div>
@@ -83,8 +92,15 @@ export default function ApplicationForm() {
             <h3 className="text-lg font-bold">Personal Details</h3>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label>Full Name</Label>
+                <Label>Full Name (as per Aadhar)</Label>
                 <Input placeholder="John Doe" className="h-12 bg-white rounded-xl" />
+              </div>
+              <div className="space-y-2">
+                <Label>Aadhar Card Number</Label>
+                <div className="relative">
+                  <Input placeholder="1234 5678 9012" className="h-12 bg-white rounded-xl pl-10" maxLength={14} />
+                  <Fingerprint className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                </div>
               </div>
               <div className="space-y-2">
                 <Label>Date of Birth</Label>
@@ -104,12 +120,8 @@ export default function ApplicationForm() {
                 </RadioGroup>
               </div>
               <div className="space-y-2">
-                <Label>Nationality</Label>
-                <Input placeholder="e.g. United States" className="h-12 bg-white rounded-xl" />
-              </div>
-              <div className="space-y-2">
-                <Label>Current Address</Label>
-                <Textarea placeholder="123 Education Lane, NY..." className="bg-white rounded-xl" />
+                <Label>Full Address</Label>
+                <Textarea placeholder="House No, Area, City, Pincode..." className="bg-white rounded-xl" />
               </div>
             </div>
           </div>
@@ -117,29 +129,39 @@ export default function ApplicationForm() {
 
         {step === 2 && (
           <div className="space-y-6 animate-fade-in">
-            <h3 className="text-lg font-bold">Academic Details</h3>
+            <h3 className="text-lg font-bold">Academic History</h3>
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label>Highest Qualification</Label>
-                <Input placeholder="High School Diploma" className="h-12 bg-white rounded-xl" />
+                <Label>10th Board (e.g., CBSE, ICSE, State)</Label>
+                <Input placeholder="CBSE" className="h-12 bg-white rounded-xl" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label>10th Score (%)</Label>
+                  <Label>10th Percentage/CGPA</Label>
+                  <Input placeholder="9.5" className="h-12 bg-white rounded-xl" />
+                </div>
+                <div className="space-y-2">
+                  <Label>Year of Passing</Label>
+                  <Input type="number" placeholder="2021" className="h-12 bg-white rounded-xl" />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>12th Stream (Science/Comm/Arts)</Label>
+                <Input placeholder="Science (PCM)" className="h-12 bg-white rounded-xl" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>12th Percentage</Label>
                   <Input placeholder="92%" className="h-12 bg-white rounded-xl" />
                 </div>
                 <div className="space-y-2">
-                  <Label>12th Score (%)</Label>
-                  <Input placeholder="95%" className="h-12 bg-white rounded-xl" />
+                  <Label>Year of Passing</Label>
+                  <Input type="number" placeholder="2023" className="h-12 bg-white rounded-xl" />
                 </div>
               </div>
               <div className="space-y-2">
-                <Label>English Proficiency (IELTS/TOEFL)</Label>
-                <Input placeholder="7.5" className="h-12 bg-white rounded-xl" />
-              </div>
-              <div className="space-y-2">
-                <Label>Year of Completion</Label>
-                <Input type="number" placeholder="2023" className="h-12 bg-white rounded-xl" />
+                <Label>Entrance Exam Score (JEE/NEET/CAT)</Label>
+                <Input placeholder="JEE Rank: 4500" className="h-12 bg-white rounded-xl" />
               </div>
             </div>
           </div>
@@ -147,16 +169,16 @@ export default function ApplicationForm() {
 
         {step === 3 && (
           <div className="space-y-6 animate-fade-in">
-            <h3 className="text-lg font-bold">Document Upload</h3>
+            <h3 className="text-lg font-bold">Document Verification</h3>
             
-            <DocumentGuidanceCard docType="Statement of Purpose" />
+            <DocumentGuidanceCard docType="Graduation Marksheets" />
 
             <div className="grid grid-cols-1 gap-4 pt-2">
               {[
-                { label: "Passport", sub: "Scan of bio page" },
-                { label: "Transcript", sub: "Latest academic record" },
-                { label: "Resume/CV", sub: "Professional profile" },
-                { label: "SOP", sub: "Statement of Purpose (PDF)" }
+                { label: "Aadhar Card", sub: "Front & Back scan" },
+                { label: "10th Marksheet", sub: "Official board certificate" },
+                { label: "12th Marksheet", sub: "Official board certificate" },
+                { label: "Graduation Degree", sub: "For PG applicants only" }
               ].map((doc, idx) => (
                 <div 
                   key={idx} 
@@ -192,37 +214,33 @@ export default function ApplicationForm() {
 
         {step === 4 && (
           <div className="space-y-6 animate-fade-in">
-            <h3 className="text-lg font-bold">Review Application</h3>
+            <h3 className="text-lg font-bold">Review & Submit</h3>
             <div className="bg-white p-5 rounded-3xl border border-secondary shadow-sm space-y-4">
               <div className="flex items-center gap-4">
                 <div className="bg-primary/10 p-3 rounded-2xl">
                   <GraduationCap className="text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-bold">Stanford University</h4>
-                  <p className="text-xs text-muted-foreground">Computer Science, Fall 2024</p>
+                  <h4 className="font-bold">IIT Bombay</h4>
+                  <p className="text-xs text-muted-foreground">B.Tech Computer Science, 2024</p>
                 </div>
               </div>
               <hr className="border-secondary" />
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Applicant</span>
+                  <span className="text-muted-foreground">Full Name</span>
                   <span className="font-medium text-right">Jemish Macwan</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Status</span>
-                  <span className="font-medium text-right text-primary">Ready to Submit</span>
-                </div>
-                <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Documents</span>
-                  <span className="font-medium text-right text-green-600 font-bold">{uploadedDocs.length} / 4 Uploaded</span>
+                  <span className="font-medium text-right text-green-600 font-bold">{uploadedDocs.length} / 4 Verified</span>
                 </div>
               </div>
             </div>
             
             <div className="flex items-start gap-3 p-4 bg-primary/5 rounded-2xl text-[11px] text-muted-foreground leading-relaxed italic">
               <FileText className="text-primary shrink-0" size={16} />
-              By clicking "Submit", I confirm that all provided details are correct to my best knowledge and I agree to the terms of processing my data.
+              I hereby declare that all information provided is true to the best of my knowledge and matches my official Indian govt-issued documents.
             </div>
           </div>
         )}
@@ -233,7 +251,7 @@ export default function ApplicationForm() {
           className="w-full h-14 text-lg rounded-2xl shadow-xl shadow-primary/20 bg-primary group hover:scale-[1.02] transition-transform"
           onClick={step === totalSteps ? handleSubmit : nextStep}
         >
-          {step === totalSteps ? "Submit Application" : "Continue"}
+          {step === totalSteps ? "Confirm & Pay Fees" : "Next Step"}
           <ChevronRight size={20} className="ml-2 transition-transform group-hover:translate-x-1" />
         </Button>
       </div>

@@ -10,8 +10,8 @@ import {
   Star, 
   X,
   CheckCircle2,
-  Globe,
-  DollarSign
+  BookOpen,
+  GraduationCap
 } from "lucide-react";
 import Link from "next/link";
 import { 
@@ -26,93 +26,95 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 const universities = [
   {
-    id: "1",
-    name: "Stanford University",
-    location: "California, USA",
-    country: "USA",
+    id: "iit-b",
+    name: "IIT Bombay",
+    location: "Mumbai, Maharashtra",
+    state: "Maharashtra",
     rating: 4.9,
-    fee: 55000,
-    description: "Ranked #1 for Computer Science and Innovation world-wide.",
-    image: "https://picsum.photos/seed/stan1/600/400"
+    type: "UG/PG",
+    stream: "Engineering",
+    description: "Premier institute for technology and research in India.",
+    image: "https://picsum.photos/seed/iitb/600/400"
   },
   {
-    id: "2",
-    name: "Oxford University",
-    location: "Oxford, UK",
-    country: "UK",
+    id: "iim-a",
+    name: "IIM Ahmedabad",
+    location: "Ahmedabad, Gujarat",
+    state: "Gujarat",
     rating: 5.0,
-    fee: 42000,
-    description: "Oldest university in the English-speaking world with rich heritage.",
-    image: "https://picsum.photos/seed/oxf1/600/400"
+    type: "PG",
+    stream: "Management",
+    description: "The top-ranked business school in India for management studies.",
+    image: "https://picsum.photos/seed/iima/600/400"
   },
   {
-    id: "3",
-    name: "MIT",
-    location: "Massachusetts, USA",
-    country: "USA",
+    id: "du-srcc",
+    name: "SRCC, Delhi University",
+    location: "New Delhi, Delhi",
+    state: "Delhi",
     rating: 4.8,
-    fee: 52000,
-    description: "Global leader in technology, engineering, and artificial intelligence.",
-    image: "https://picsum.photos/seed/mit1/600/400"
+    type: "UG",
+    stream: "Commerce",
+    description: "Premier college for commerce and economics in Asia.",
+    image: "https://picsum.photos/seed/srcc/600/400"
   },
   {
-    id: "4",
-    name: "University of Toronto",
-    location: "Toronto, Canada",
-    country: "Canada",
+    id: "bits-p",
+    name: "BITS Pilani",
+    location: "Pilani, Rajasthan",
+    state: "Rajasthan",
     rating: 4.7,
-    fee: 35000,
-    description: "Canada's leading institution of learning, discovery and knowledge creation.",
-    image: "https://picsum.photos/seed/tor1/600/400"
+    type: "UG/PG",
+    stream: "Engineering",
+    description: "A leading private deemed university for science and technology.",
+    image: "https://picsum.photos/seed/bits/600/400"
   },
   {
-    id: "5",
-    name: "ETH Zurich",
-    location: "Zurich, Switzerland",
-    country: "Switzerland",
-    rating: 4.9,
-    fee: 15000,
-    description: "A world-class university for technology and natural sciences.",
-    image: "https://picsum.photos/seed/eth1/600/400"
+    id: "aiims-d",
+    name: "AIIMS Delhi",
+    location: "New Delhi, Delhi",
+    state: "Delhi",
+    rating: 5.0,
+    type: "UG/PG",
+    stream: "Medical",
+    description: "The foremost medical college and hospital in India.",
+    image: "https://picsum.photos/seed/aiims/600/400"
   }
 ];
 
 export default function UniversityListingPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCountry, setSelectedCountry] = useState("all");
-  const [selectedFeeRange, setSelectedFeeRange] = useState("all");
+  const [selectedType, setSelectedType] = useState("all");
+  const [selectedStream, setSelectedStream] = useState("all");
 
   const filteredUniversities = useMemo(() => {
     return universities.filter((uni) => {
       const matchesSearch = uni.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                            uni.location.toLowerCase().includes(searchQuery.toLowerCase());
       
-      const matchesCountry = selectedCountry === "all" || uni.country === selectedCountry;
-      
-      let matchesFee = true;
-      if (selectedFeeRange === "low") matchesFee = uni.fee < 20000;
-      if (selectedFeeRange === "mid") matchesFee = uni.fee >= 20000 && uni.fee <= 45000;
-      if (selectedFeeRange === "high") matchesFee = uni.fee > 45000;
+      const matchesType = selectedType === "all" || uni.type.includes(selectedType);
+      const matchesStream = selectedStream === "all" || uni.stream === selectedStream;
 
-      return matchesSearch && matchesCountry && matchesFee;
+      return matchesSearch && matchesType && matchesStream;
     });
-  }, [searchQuery, selectedCountry, selectedFeeRange]);
+  }, [searchQuery, selectedType, selectedStream]);
 
   const resetFilters = () => {
-    setSelectedCountry("all");
-    setSelectedFeeRange("all");
+    setSelectedType("all");
+    setSelectedStream("all");
     setSearchQuery("");
   };
 
-  const activeFiltersCount = (selectedCountry !== "all" ? 1 : 0) + (selectedFeeRange !== "all" ? 1 : 0);
+  const activeFiltersCount = (selectedType !== "all" ? 1 : 0) + (selectedStream !== "all" ? 1 : 0);
 
   return (
     <div className="flex flex-col pt-12 pb-10">
       <div className="px-6 flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold">Universities</h2>
+        <h2 className="text-2xl font-bold">Indian Universities</h2>
         
         <Sheet>
           <SheetTrigger asChild>
@@ -128,50 +130,45 @@ export default function UniversityListingPage() {
           <SheetContent side="right" className="w-[85%] sm:w-[400px] rounded-l-[2.5rem] p-0">
             <div className="flex flex-col h-full">
               <SheetHeader className="p-8 pb-4">
-                <SheetTitle className="text-2xl font-bold">Filter Options</SheetTitle>
+                <SheetTitle className="text-2xl font-bold">Admission Filters</SheetTitle>
               </SheetHeader>
               
               <div className="flex-1 px-8 space-y-8 overflow-y-auto pb-10">
-                {/* Country Filter */}
+                {/* Course Type Filter */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider">
-                    <Globe size={16} /> Country
+                    <GraduationCap size={16} /> Course Type
                   </div>
-                  <RadioGroup value={selectedCountry} onValueChange={setSelectedCountry} className="grid grid-cols-1 gap-3">
-                    {["all", "USA", "UK", "Canada", "Switzerland"].map((c) => (
-                      <Label key={c} className={cn(
+                  <RadioGroup value={selectedType} onValueChange={setSelectedType} className="grid grid-cols-1 gap-3">
+                    {["all", "UG", "PG"].map((t) => (
+                      <Label key={t} className={cn(
                         "flex items-center justify-between p-4 rounded-2xl border-2 transition-all cursor-pointer",
-                        selectedCountry === c ? "border-primary bg-primary/5 shadow-sm" : "border-secondary hover:bg-secondary/20"
+                        selectedType === t ? "border-primary bg-primary/5 shadow-sm" : "border-secondary hover:bg-secondary/20"
                       )}>
                         <div className="flex items-center gap-3">
-                          <RadioGroupItem value={c} id={`country-${c}`} className="sr-only" />
-                          <span className="font-bold capitalize">{c === "all" ? "All Countries" : c}</span>
+                          <RadioGroupItem value={t} id={`type-${t}`} className="sr-only" />
+                          <span className="font-bold">{t === "all" ? "All Levels" : t === "UG" ? "Undergraduate" : "Postgraduate"}</span>
                         </div>
-                        {selectedCountry === c && <CheckCircle2 size={18} className="text-primary" />}
+                        {selectedType === t && <CheckCircle2 size={18} className="text-primary" />}
                       </Label>
                     ))}
                   </RadioGroup>
                 </div>
 
-                {/* Fee Range Filter */}
+                {/* Stream Filter */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider">
-                    <DollarSign size={16} /> Fee Range (USD)
+                    <BookOpen size={16} /> Stream
                   </div>
-                  <RadioGroup value={selectedFeeRange} onValueChange={setSelectedFeeRange} className="grid grid-cols-1 gap-3">
-                    {[
-                      { label: "Any Range", value: "all" },
-                      { label: "Under $20k", value: "low" },
-                      { label: "$20k - $45k", value: "mid" },
-                      { label: "Above $45k", value: "high" }
-                    ].map((f) => (
-                      <Label key={f.value} className={cn(
+                  <RadioGroup value={selectedStream} onValueChange={setSelectedStream} className="grid grid-cols-1 gap-3">
+                    {["all", "Engineering", "Management", "Commerce", "Medical"].map((s) => (
+                      <Label key={s} className={cn(
                         "flex items-center justify-between p-4 rounded-2xl border-2 transition-all cursor-pointer",
-                        selectedFeeRange === f.value ? "border-primary bg-primary/5 shadow-sm" : "border-secondary hover:bg-secondary/20"
+                        selectedStream === s ? "border-primary bg-primary/5 shadow-sm" : "border-secondary hover:bg-secondary/20"
                       )}>
-                        <span className="font-bold">{f.label}</span>
-                        {selectedFeeRange === f.value && <CheckCircle2 size={18} className="text-primary" />}
-                        <RadioGroupItem value={f.value} className="sr-only" />
+                        <span className="font-bold">{s === "all" ? "All Streams" : s}</span>
+                        {selectedStream === s && <CheckCircle2 size={18} className="text-primary" />}
+                        <RadioGroupItem value={s} className="sr-only" />
                       </Label>
                     ))}
                   </RadioGroup>
@@ -195,34 +192,25 @@ export default function UniversityListingPage() {
         <div className="relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={20} />
           <Input 
-            placeholder="Search by country or name..." 
+            placeholder="Search for IITs, DU colleges..." 
             className="pl-12 h-14 bg-white rounded-2xl shadow-sm border-none focus-visible:ring-primary"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          {searchQuery && (
-            <button 
-              onClick={() => setSearchQuery("")}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground bg-secondary/50 p-1 rounded-full"
-            >
-              <X size={14} />
-            </button>
-          )}
         </div>
       </div>
 
       {/* Active Filters Display */}
       {activeFiltersCount > 0 && (
         <div className="px-6 mb-4 flex flex-wrap gap-2">
-          {selectedCountry !== "all" && (
+          {selectedType !== "all" && (
             <Badge variant="secondary" className="px-3 py-1.5 rounded-xl bg-primary/10 text-primary border-none flex items-center gap-1">
-              {selectedCountry} <X size={14} className="cursor-pointer" onClick={() => setSelectedCountry("all")} />
+              {selectedType} <X size={14} className="cursor-pointer" onClick={() => setSelectedType("all")} />
             </Badge>
           )}
-          {selectedFeeRange !== "all" && (
+          {selectedStream !== "all" && (
             <Badge variant="secondary" className="px-3 py-1.5 rounded-xl bg-primary/10 text-primary border-none flex items-center gap-1">
-              {selectedFeeRange === "low" ? "Under $20k" : selectedFeeRange === "mid" ? "$20k-$45k" : "Above $45k"} 
-              <X size={14} className="cursor-pointer" onClick={() => setSelectedFeeRange("all")} />
+              {selectedStream} <X size={14} className="cursor-pointer" onClick={() => setSelectedStream("all")} />
             </Badge>
           )}
         </div>
@@ -238,14 +226,14 @@ export default function UniversityListingPage() {
                   <Star size={12} className="fill-yellow-400 text-yellow-400" /> {uni.rating}
                 </div>
                 <div className="absolute top-4 right-4 bg-primary/90 backdrop-blur px-3 py-1.5 rounded-full text-[10px] font-black text-white shadow-sm uppercase tracking-widest">
-                  ${uni.fee.toLocaleString()}/yr
+                  {uni.stream}
                 </div>
               </div>
               <div className="p-6">
                 <div className="flex justify-between items-start mb-3">
                   <h3 className="text-xl font-bold leading-tight">{uni.name}</h3>
                   <div className="flex items-center gap-1 text-primary bg-primary/5 px-2 py-1 rounded-lg text-[10px] font-bold">
-                    <MapPin size={10} /> {uni.country}
+                    <MapPin size={10} /> {uni.location}
                   </div>
                 </div>
                 <p className="text-muted-foreground text-sm line-clamp-2 mb-6 leading-relaxed">
@@ -253,7 +241,7 @@ export default function UniversityListingPage() {
                 </p>
                 <Link href={`/universities/${uni.id}`}>
                   <Button className="w-full h-12 rounded-xl bg-primary hover:bg-primary/90 shadow-lg shadow-primary/20 font-bold">
-                    View Details
+                    Check Eligibility
                   </Button>
                 </Link>
               </div>
@@ -265,8 +253,8 @@ export default function UniversityListingPage() {
               <Search className="w-12 h-12 text-muted-foreground/40" />
             </div>
             <div>
-              <h3 className="text-lg font-bold">No Universities Found</h3>
-              <p className="text-sm text-muted-foreground">Try adjusting your filters or search query.</p>
+              <h3 className="text-lg font-bold">No Colleges Found</h3>
+              <p className="text-sm text-muted-foreground">Try searching for Engineering or Medical colleges.</p>
             </div>
             <Button variant="ghost" className="text-primary font-bold" onClick={resetFilters}>
               Clear All Filters
@@ -276,8 +264,4 @@ export default function UniversityListingPage() {
       </div>
     </div>
   );
-}
-
-function cn(...inputs: any[]) {
-  return inputs.filter(Boolean).join(" ");
 }

@@ -7,39 +7,39 @@ import Link from "next/link";
 
 const applications = [
   {
-    id: "APP-98231",
-    uni: "Stanford University",
-    course: "Computer Science",
-    date: "12 Oct 2023",
-    status: 2, // Under Review
-    estDate: "Nov 15, 2023",
+    id: "APP-IITB-101",
+    uni: "IIT Bombay",
+    course: "B.Tech Computer Science",
+    date: "12 Feb 2024",
+    status: 1, // Document Verification
+    estDate: "Mar 15, 2024",
     logo: "uni-1"
   },
   {
-    id: "APP-98105",
-    uni: "MIT",
-    course: "Biotechnology",
-    date: "05 Oct 2023",
-    status: 1, // Submitted
-    estDate: "Nov 01, 2023",
+    id: "APP-DU-502",
+    uni: "SRCC, Delhi University",
+    course: "B.Com (Hons)",
+    date: "05 Feb 2024",
+    status: 0, // Submitted
+    estDate: "Mar 01, 2024",
     logo: "uni-3"
   }
 ];
 
 const steps = [
-  { title: "Application Submitted", status: "completed" },
-  { title: "Under Review", status: "current" },
-  { title: "Document Verification", status: "pending" },
-  { title: "Offer Letter", status: "pending" },
-  { title: "Visa Process", status: "pending" }
+  { title: "Application Fees Paid", status: "completed" },
+  { title: "Document Verification", status: "current" },
+  { title: "Entrance Merit List", status: "pending" },
+  { title: "Provisional Admission", status: "pending" },
+  { title: "Fee Payment & Enrollment", status: "pending" }
 ];
 
 export default function ApplicationsPage() {
   return (
     <div className="flex flex-col pt-12">
       <div className="px-6 mb-8">
-        <h2 className="text-2xl font-bold text-foreground">My Applications</h2>
-        <p className="text-muted-foreground text-sm">Track your progress in real-time</p>
+        <h2 className="text-2xl font-bold text-foreground">Admission Status</h2>
+        <p className="text-muted-foreground text-sm">Track your Centralized Admissions progress</p>
       </div>
 
       <div className="px-6 space-y-8">
@@ -51,7 +51,7 @@ export default function ApplicationsPage() {
                    <GraduationCap className="text-primary w-6 h-6" />
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">Application ID</p>
+                  <p className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">Enrollment ID</p>
                   <p className="text-sm font-bold text-primary">{app.id}</p>
                 </div>
               </div>
@@ -59,14 +59,14 @@ export default function ApplicationsPage() {
               <p className="text-sm text-muted-foreground mb-3">{app.course}</p>
               <div className="flex items-center gap-2">
                 <span className="bg-primary/10 text-primary text-[10px] font-black uppercase px-2 py-1 rounded-md">
-                  Active
+                  Processing
                 </span>
                 <p className="text-xs text-muted-foreground flex items-center gap-1"><Clock size={12} /> {app.date}</p>
               </div>
             </div>
 
             <div className="p-6">
-              <h4 className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mb-6 border-b border-secondary pb-2 w-fit">Tracking Timeline</h4>
+              <h4 className="text-[10px] font-black uppercase text-muted-foreground tracking-widest mb-6 border-b border-secondary pb-2 w-fit">Counseling Steps</h4>
               
               <div className="space-y-0">
                 {steps.map((step, idx) => {
@@ -99,10 +99,7 @@ export default function ApplicationsPage() {
                           {step.title}
                         </p>
                         {isCurrent && (
-                          <p className="text-[10px] text-muted-foreground mt-1 bg-primary/5 px-2 py-0.5 rounded-md w-fit border border-primary/10">In progress</p>
-                        )}
-                        {isCompleted && (
-                          <p className="text-[10px] text-green-600/60 mt-1">Completed</p>
+                          <p className="text-[10px] text-muted-foreground mt-1 bg-primary/5 px-2 py-0.5 rounded-md w-fit border border-primary/10">Under Verification</p>
                         )}
                       </div>
                     </div>
@@ -113,16 +110,16 @@ export default function ApplicationsPage() {
               <div className="mt-10 pt-6 border-t border-secondary">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <p className="text-[10px] uppercase font-bold text-muted-foreground">Est. Decision</p>
+                    <p className="text-[10px] uppercase font-bold text-muted-foreground">Merit List Date</p>
                     <p className="text-sm font-bold">{app.estDate}</p>
                   </div>
                   <Button variant="outline" size="sm" className="rounded-xl h-10 border-primary/20 text-primary hover:bg-primary/5 font-bold">
-                    <MessageCircle size={16} className="mr-2" /> Advisor
+                    <MessageCircle size={16} className="mr-2" /> Admission Cell
                   </Button>
                 </div>
                 <Link href={`/applications/${app.id}`} className="block w-full">
                   <Button className="w-full rounded-xl bg-secondary hover:bg-secondary/80 text-foreground font-bold h-12 shadow-none border border-black/5">
-                    View Full Details <ChevronRight size={16} className="ml-1" />
+                    View Full Application <ChevronRight size={16} className="ml-1" />
                   </Button>
                 </Link>
               </div>
@@ -137,8 +134,8 @@ export default function ApplicationsPage() {
             <AlertCircle />
           </div>
           <div>
-            <h4 className="font-bold text-sm">Need Assistance?</h4>
-            <p className="text-[11px] text-muted-foreground leading-snug">Book a 1-on-1 session with our senior counselor for visa guidance.</p>
+            <h4 className="font-bold text-sm">Need Help?</h4>
+            <p className="text-[11px] text-muted-foreground leading-snug">Connect with our education experts for counseling and fee structure guidance.</p>
           </div>
         </div>
       </div>
