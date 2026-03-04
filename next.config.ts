@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // output: 'export',
+  output: 'export',
 
   images: {
     unoptimized: true,
