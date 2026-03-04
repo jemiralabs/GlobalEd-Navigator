@@ -19,6 +19,7 @@ import {
   BookOpen
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 // Mock data updated for Indian context
 const APP_DETAILS: any = {
@@ -178,9 +179,11 @@ export default function ApplicationDetailPage() {
         <Button variant="outline" className="flex-1 h-14 rounded-2xl font-bold border-primary/20 text-primary">
           <Download size={20} className="mr-2" /> Admission PDF
         </Button>
-        <Button className="flex-[1.5] h-14 rounded-2xl font-bold shadow-xl shadow-primary/20 bg-primary">
-          <MessageCircle size={20} className="mr-2" /> Help Desk
-        </Button>
+        <Link href="/help-desk" className="flex-[1.5]">
+          <Button className="w-full h-14 rounded-2xl font-bold shadow-xl shadow-primary/20 bg-primary">
+            <MessageCircle size={20} className="mr-2" /> Help Desk
+          </Button>
+        </Link>
       </div>
     </div>
   );

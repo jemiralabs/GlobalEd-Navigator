@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Clock, MapPin, GraduationCap, MessageCircle, AlertCircle, ChevronRight } from "lucide-react";
+import { CheckCircle2, Clock, GraduationCap, MessageCircle, AlertCircle, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -113,9 +113,11 @@ export default function ApplicationsPage() {
                     <p className="text-[10px] uppercase font-bold text-muted-foreground">Merit List Date</p>
                     <p className="text-sm font-bold">{app.estDate}</p>
                   </div>
-                  <Button variant="outline" size="sm" className="rounded-xl h-10 border-primary/20 text-primary hover:bg-primary/5 font-bold">
-                    <MessageCircle size={16} className="mr-2" /> Admission Cell
-                  </Button>
+                  <Link href="/help-desk">
+                    <Button variant="outline" size="sm" className="rounded-xl h-10 border-primary/20 text-primary hover:bg-primary/5 font-bold">
+                      <MessageCircle size={16} className="mr-2" /> Admission Cell
+                    </Button>
+                  </Link>
                 </div>
                 <Link href={`/applications/${app.id}`} className="block w-full">
                   <Button className="w-full rounded-xl bg-secondary hover:bg-secondary/80 text-foreground font-bold h-12 shadow-none border border-black/5">
@@ -129,15 +131,17 @@ export default function ApplicationsPage() {
       </div>
 
       <div className="px-6 mt-10 mb-12">
-        <div className="bg-accent/10 p-6 rounded-[2.5rem] flex items-center gap-4 border border-accent/10">
-          <div className="bg-accent text-white p-3 rounded-2xl shadow-lg shadow-accent/20">
-            <AlertCircle />
+        <Link href="/help-desk" className="block">
+          <div className="bg-accent/10 p-6 rounded-[2.5rem] flex items-center gap-4 border border-accent/10 hover:bg-accent/20 transition-colors cursor-pointer">
+            <div className="bg-accent text-white p-3 rounded-2xl shadow-lg shadow-accent/20">
+              <AlertCircle />
+            </div>
+            <div>
+              <h4 className="font-bold text-sm">Need Help?</h4>
+              <p className="text-[11px] text-muted-foreground leading-snug">Connect with our education experts for counseling and fee structure guidance.</p>
+            </div>
           </div>
-          <div>
-            <h4 className="font-bold text-sm">Need Help?</h4>
-            <p className="text-[11px] text-muted-foreground leading-snug">Connect with our education experts for counseling and fee structure guidance.</p>
-          </div>
-        </div>
+        </Link>
       </div>
     </div>
   );
