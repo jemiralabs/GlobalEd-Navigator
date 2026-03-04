@@ -2,7 +2,19 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, FileText, MessageCircle, User, GraduationCap, LogOut, Bell, CheckCircle2, Info, AlertCircle } from "lucide-react";
+import { 
+  Home, 
+  FileText, 
+  MessageCircle, 
+  User, 
+  GraduationCap, 
+  LogOut, 
+  Bell, 
+  CheckCircle2, 
+  Info, 
+  AlertCircle,
+  LogIn
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +27,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useEffect, useState } from "react";
 
 const navItems = [
   { label: "Home", icon: Home, href: "/home" },
@@ -49,20 +62,22 @@ const mockNotifications = [
     icon: AlertCircle,
     color: "text-orange-500",
     bg: "bg-orange-50"
-  },
-  {
-    id: 4,
-    title: "Document Re-upload",
-    desc: "Your 12th marksheet scan is blurry. Please re-upload for IIM Indore.",
-    time: "2d ago",
-    icon: FileText,
-    color: "text-red-500",
-    bg: "bg-red-50"
   }
 ];
 
 export function TopNav() {
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("userLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userLoggedIn");
+    window.location.href = "/home";
+  };
 
   return (
     <nav className="hidden md:block sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md">
@@ -78,6 +93,8 @@ export function TopNav() {
           <div className="flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
+              // Hide private links if not logged in
+              if (!isLoggedIn && (item.href === "/applications" || item.href === "/profile/counseling")) return null;
               return (
                 <Link
                   key={item.href}
@@ -98,81 +115,81 @@ export function TopNav() {
         </div>
 
         <div className="flex items-center gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground relative hover:bg-secondary">
-                <Bell size={20} />
-                <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-80 mt-2 rounded-2xl p-0 overflow-hidden shadow-2xl border-secondary" align="end">
-              <div className="p-4 border-b bg-secondary/10 flex justify-between items-center">
-                <h4 className="font-bold text-sm">Admissions Alerts</h4>
-                <Link href="/profile/notifications" className="text-[10px] font-black text-primary uppercase hover:underline">View All</Link>
-              </div>
-              <ScrollArea className="h-80">
-                <div className="flex flex-col">
-                  {mockNotifications.map((notif) => (
-                    <div key={notif.id} className="p-4 border-b last:border-0 hover:bg-secondary/5 transition-colors cursor-pointer">
-                      <div className="flex gap-3">
-                        <div className={cn("p-2 rounded-xl h-fit shrink-0", notif.bg, notif.color)}>
-                          <notif.icon size={16} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex justify-between items-start mb-0.5">
-                            <h5 className="font-bold text-[11px] truncate pr-2">{notif.title}</h5>
-                            <span className="text-[9px] text-muted-foreground whitespace-nowrap">{notif.time}</span>
+          {isLoggedIn ? (
+            <>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground relative hover:bg-secondary">
+                    <Bell size={20} />
+                    <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-80 mt-2 rounded-2xl p-0 overflow-hidden shadow-2xl border-secondary" align="end">
+                  <div className="p-4 border-b bg-secondary/10 flex justify-between items-center">
+                    <h4 className="font-bold text-sm">Admissions Alerts</h4>
+                    <Link href="/profile/notifications" className="text-[10px] font-black text-primary uppercase hover:underline">View All</Link>
+                  </div>
+                  <ScrollArea className="h-60">
+                    <div className="flex flex-col">
+                      {mockNotifications.map((notif) => (
+                        <div key={notif.id} className="p-4 border-b last:border-0 hover:bg-secondary/5 transition-colors cursor-pointer">
+                          <div className="flex gap-3">
+                            <div className={cn("p-2 rounded-xl h-fit shrink-0", notif.bg, notif.color)}>
+                              <notif.icon size={16} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex justify-between items-start mb-0.5">
+                                <h5 className="font-bold text-[11px] truncate pr-2">{notif.title}</h5>
+                                <span className="text-[9px] text-muted-foreground whitespace-nowrap">{notif.time}</span>
+                              </div>
+                              <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2">{notif.desc}</p>
+                            </div>
                           </div>
-                          <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2">{notif.desc}</p>
                         </div>
-                      </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </ScrollArea>
-              <div className="p-3 bg-secondary/5 text-center border-t">
-                 <Link href="/profile/notifications" className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest hover:text-primary">
-                   Mark all as read
-                 </Link>
-              </div>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full border-2 border-white shadow-sm hover:scale-105 transition-transform">
-                <Avatar className="h-9 w-9">
-                  <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
-                  <AvatarFallback>JM</AvatarFallback>
-                </Avatar>
+                  </ScrollArea>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-10 w-10 rounded-full border-2 border-white shadow-sm hover:scale-105 transition-transform">
+                    <Avatar className="h-9 w-9">
+                      <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
+                      <AvatarFallback>JM</AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 mt-2 rounded-2xl p-2 shadow-2xl border-secondary" align="end" forceMount>
+                  <DropdownMenuLabel className="font-normal p-4">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-bold leading-none">Jemish Macwan</p>
+                      <p className="text-xs leading-none text-muted-foreground">jemish@example.com</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild className="rounded-xl cursor-pointer py-2.5">
+                    <Link href="/profile" className="flex items-center gap-2">
+                      <User size={16} /> Profile Settings
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleLogout} className="rounded-xl cursor-pointer py-2.5 text-destructive focus:text-destructive focus:bg-destructive/5">
+                    <div className="flex items-center gap-2">
+                      <LogOut size={16} /> Log out
+                    </div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
+          ) : (
+            <Link href="/login">
+              <Button className="rounded-xl font-bold bg-primary px-6 h-10">
+                <LogIn size={18} className="mr-2" /> Login
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 mt-2 rounded-2xl p-2 shadow-2xl border-secondary" align="end" forceMount>
-              <DropdownMenuLabel className="font-normal p-4">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-bold leading-none">Jemish Macwan</p>
-                  <p className="text-xs leading-none text-muted-foreground">jemish@example.com</p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild className="rounded-xl cursor-pointer py-2.5">
-                <Link href="/profile" className="flex items-center gap-2">
-                  <User size={16} /> Profile Settings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild className="rounded-xl cursor-pointer py-2.5">
-                <Link href="/profile/favorites" className="flex items-center gap-2">
-                  <Bell size={16} /> Favorites
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild className="rounded-xl cursor-pointer py-2.5 text-destructive focus:text-destructive">
-                <Link href="/login" className="flex items-center gap-2">
-                  <LogOut size={16} /> Log out
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </Link>
+          )}
         </div>
       </div>
     </nav>

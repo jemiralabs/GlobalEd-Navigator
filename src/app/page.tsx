@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { PlaceHolderImages } from "@/lib/placeholder-images";
 import { GraduationCap } from "lucide-react";
 
 export default function SplashScreen() {
@@ -13,7 +11,8 @@ export default function SplashScreen() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(false);
-      setTimeout(() => router.push("/login"), 500);
+      // Change redirect to /home to allow guest roaming
+      setTimeout(() => router.push("/home"), 500);
     }, 2500);
 
     return () => clearTimeout(timer);
@@ -37,8 +36,8 @@ export default function SplashScreen() {
         </p>
       </div>
       
-      <div className="absolute bottom-12 text-white/60 text-sm">
-        Powered by AI Guidance
+      <div className="absolute bottom-12 text-white/60 text-sm font-bold uppercase tracking-widest">
+        Empowering Indian Students
       </div>
     </div>
   );

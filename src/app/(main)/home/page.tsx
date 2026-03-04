@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
@@ -14,7 +14,8 @@ import {
   CheckCircle2,
   BookOpen,
   X,
-  Bell
+  Bell,
+  LogIn
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -82,9 +83,15 @@ const universities = [
 
 export default function HomePage() {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("all");
   const [selectedStream, setSelectedStream] = useState("all");
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("userLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+  }, []);
 
   const filteredUniversities = useMemo(() => {
     return universities.filter((uni) => {
@@ -104,18 +111,28 @@ export default function HomePage() {
       <div className="px-6 mb-8 flex justify-between items-center">
         <div>
           <h2 className="text-2xl font-bold flex items-center gap-2">
-            Hello, Jemish 👋
+            {isLoggedIn ? "Hello, Jemish 👋" : "Hello, Student 👋"}
           </h2>
           <p className="text-muted-foreground text-sm font-medium italic">Phase 1 Admissions are Live!</p>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/profile/notifications" className="relative p-2 bg-white rounded-xl shadow-sm border border-secondary md:hidden">
-            <Bell size={20} className="text-muted-foreground" />
-            <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
-          </Link>
-          <Link href="/profile" className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-white shadow-lg">
-            <img src="https://picsum.photos/seed/user1/100/100" alt="Avatar" className="w-full h-full object-cover" />
-          </Link>
+          {isLoggedIn ? (
+            <>
+              <Link href="/profile/notifications" className="relative p-2 bg-white rounded-xl shadow-sm border border-secondary md:hidden">
+                <Bell size={20} className="text-muted-foreground" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+              </Link>
+              <Link href="/profile" className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-white shadow-lg">
+                <img src="https://picsum.photos/seed/user1/100/100" alt="Avatar" className="w-full h-full object-cover" />
+              </Link>
+            </>
+          ) : (
+            <Link href="/login">
+              <Button variant="outline" className="rounded-xl border-primary text-primary font-bold h-12 px-5">
+                <LogIn size={18} className="mr-2" /> Login
+              </Button>
+            </Link>
+          )}
         </div>
       </div>
 
@@ -217,7 +234,7 @@ export default function HomePage() {
             <h3 className="text-xl font-bold">Top NIRF Ranked</h3>
             <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest">Premium Institutes 2024</p>
           </div>
-          <Link href="/universities" className="text-primary text-sm font-bold hover:underline">Explore All</Link>
+          <p className="text-primary text-sm font-bold opacity-50">View All</p>
         </div>
         
         <div className="flex overflow-x-auto gap-5 px-6 pb-6 no-scrollbar">
@@ -255,7 +272,7 @@ export default function HomePage() {
 
       {/* Counseling Banner */}
       <div className="px-6 mb-12">
-        <Link href="/profile/counseling" className="block bg-primary rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl shadow-primary/20 group">
+        <Link href={isLoggedIn ? "/profile/counseling" : "/login"} className="block bg-primary rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-xl shadow-primary/20 group">
           <div className="relative z-10">
             <h3 className="text-2xl font-bold mb-2">Need Admission Help?</h3>
             <p className="text-white/80 text-sm leading-relaxed mb-6 max-w-[200px]">

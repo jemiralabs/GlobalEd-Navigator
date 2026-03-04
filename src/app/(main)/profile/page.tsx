@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,11 @@ export default function ProfilePage() {
     { icon: Shield, label: "Security & Privacy", color: "text-green-500", href: "/profile/security" },
     { icon: GraduationCap, label: "Educational History", color: "text-purple-500", href: "/profile/education" }
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem("userLoggedIn");
+    router.push("/home");
+  };
 
   return (
     <div className="flex flex-col pt-12 pb-10">
@@ -71,11 +75,13 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        <Link href="/login" className="block">
-          <Button variant="ghost" className="w-full h-14 rounded-2xl text-destructive hover:bg-destructive/5 hover:text-destructive font-bold">
-            <LogOut size={20} className="mr-2" /> Logout Account
-          </Button>
-        </Link>
+        <Button 
+          onClick={handleLogout}
+          variant="ghost" 
+          className="w-full h-14 rounded-2xl text-destructive hover:bg-destructive/5 hover:text-destructive font-bold"
+        >
+          <LogOut size={20} className="mr-2" /> Logout Account
+        </Button>
       </div>
     </div>
   );

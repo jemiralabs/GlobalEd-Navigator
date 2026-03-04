@@ -53,9 +53,12 @@
   @apply w-full max-w-md mx-auto min-h-screen bg-background relative overflow-hidden shadow-2xl md:max-w-none md:shadow-none md:mx-0 md:bg-transparent;
 }
 
-/* For Auth pages specifically, we want them to stay centered on desktop */
-.auth-container {
-  @apply w-full max-w-md mx-auto min-h-screen bg-background relative overflow-hidden shadow-2xl;
+.auth-wrapper {
+  @apply min-h-screen flex items-center justify-center bg-background md:bg-muted/20 p-6;
+}
+
+.auth-card {
+  @apply w-full max-w-md bg-white rounded-[2.5rem] shadow-2xl md:shadow-xl border border-secondary flex flex-col;
 }
 
 .no-scrollbar::-webkit-scrollbar {

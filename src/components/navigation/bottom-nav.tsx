@@ -2,18 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, FileText, MessageCircle, User } from "lucide-react";
+import { Home, FileText, MessageCircle, User, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const navItems = [
-  { label: "Home", icon: Home, href: "/home" },
-  { label: "Counseling", icon: MessageCircle, href: "/profile/counseling" },
-  { label: "Apps", icon: FileText, href: "/applications" },
-  { label: "Profile", icon: User, href: "/profile" },
-];
+import { useEffect, useState } from "react";
 
 export function BottomNav() {
   const pathname = usePathname();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("userLoggedIn") === "true";
+    setIsLoggedIn(loggedIn);
+  }, []);
+
+  const navItems = [
+    { label: "Home", icon: Home, href: "/home" },
+    { label: "Counseling", icon: MessageCircle, href: "/profile/counseling" },
+    { label: "Apps", icon: FileText, href: "/applications" },
+    { label: isLoggedIn ? "Profile" : "Login", icon: isLoggedIn ? User : LogIn, href: isLoggedIn ? "/profile" : "/login" },
+  ];
 
   return (
     <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 md:hidden">
