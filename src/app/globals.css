@@ -24,6 +24,15 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 214 82% 56%;
     --radius: 1.25rem;
+    
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 214 82% 56%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 214 82% 96%;
+    --sidebar-accent-foreground: 214 82% 56%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 214 82% 56%;
   }
 }
 
@@ -41,7 +50,12 @@
 }
 
 .mobile-container {
-  @apply max-w-md mx-auto min-h-screen bg-background relative overflow-hidden shadow-2xl;
+  @apply w-full max-w-md mx-auto min-h-screen bg-background relative overflow-hidden shadow-2xl md:max-w-none md:shadow-none md:mx-0 md:bg-transparent;
+}
+
+/* For Auth pages specifically, we want them to stay centered on desktop */
+.auth-container {
+  @apply w-full max-w-md mx-auto min-h-screen bg-background relative overflow-hidden shadow-2xl;
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -59,4 +73,14 @@
 
 .animate-progress {
   animation: progress 1.5s ease-in-out forwards;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full;
 }

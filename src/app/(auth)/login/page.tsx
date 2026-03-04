@@ -29,7 +29,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="mobile-container flex flex-col px-6 pt-20 pb-10">
+    <div className="auth-container flex flex-col px-6 pt-20 pb-10">
       <div className="flex flex-col items-center mb-12">
         <div className="bg-primary/10 p-4 rounded-3xl mb-4">
           <GraduationCap className="w-10 h-10 text-primary" />

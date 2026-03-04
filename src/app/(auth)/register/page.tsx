@@ -38,7 +38,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="mobile-container flex flex-col h-screen">
+    <div className="auth-container flex flex-col h-screen">
       <div className="px-6 pt-12 pb-6 flex items-center gap-4">
         <Link href="/login" className="p-2 bg-white rounded-full shadow-sm text-primary">
           <ArrowLeft size={24} />

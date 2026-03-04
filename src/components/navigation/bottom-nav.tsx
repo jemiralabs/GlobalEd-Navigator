@@ -16,7 +16,7 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40">
+    <div className="fixed bottom-0 left-0 right-0 max-w-md mx-auto z-40 md:hidden">
       <div className="bg-white border-t border-secondary px-6 py-3 flex justify-between items-center rounded-t-3xl shadow-[0_-8px_30px_rgb(0,0,0,0.04)]">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
