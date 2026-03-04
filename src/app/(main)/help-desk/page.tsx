@@ -7,7 +7,7 @@ import {
   Clock, 
   Globe, 
   ShieldCheck,
-  HeadphonesIcon
+  Headphones
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,7 +22,7 @@ export default function HelpDeskPage() {
       action: "Call Now"
     },
     {
-      icon: <HeadphonesIcon className="text-primary" />,
+      icon: <Headphones className="text-primary" />,
       title: "Mobile Support",
       value: "+91 98765 43210",
       sub: "Direct line for active applications",
@@ -38,7 +38,7 @@ export default function HelpDeskPage() {
   ];
 
   return (
-    <div className="flex flex-col pt-12 min-h-screen bg-background">
+    <div className="flex flex-col pt-4 md:pt-12 min-h-screen bg-background">
       <div className="px-6 mb-8">
         <h2 className="text-xl font-bold">Help Desk</h2>
         <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Support Center</p>

@@ -21,14 +21,6 @@ GlobalEd Navigator is a comprehensive centralized admission portal designed spec
 - **AI Integration**: [Genkit](https://firebase.google.com/docs/genkit) (Google Gemini)
 - **Database/Auth**: Simulated state with local storage (Ready for Firebase integration)
 
-## 📂 Project Structure
-
-- `src/app`: Next.js App Router pages and layouts.
-- `src/components`: Reusable UI components (ShadCN) and navigation elements.
-- `src/ai`: Genkit flows and AI prompt definitions.
-- `src/hooks`: Custom React hooks for state and UI management.
-- `src/lib`: Utility functions and placeholder data.
-
 ## 🤝 Developed By
 
 This project was designed and crafted with ❤️ by **Jemira Labs**.

@@ -1,7 +1,3 @@
-"use client";
-
-import { useParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { 
   User, 
   GraduationCap, 
@@ -18,8 +14,8 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-// Mock data updated for Indian context
 const APP_DETAILS: any = {
   "APP-IITB-101": {
     id: "APP-IITB-101",
@@ -49,6 +45,34 @@ const APP_DETAILS: any = {
       { name: "12th Marksheet", status: "Verified", date: "Feb 12, 2024" },
       { name: "Entrance Scorecard", status: "Under Review", date: "Feb 12, 2024" }
     ]
+  },
+  "APP-DU-502": {
+    id: "APP-DU-502",
+    university: "SRCC, Delhi University",
+    course: "B.Com (Hons)",
+    appliedDate: "Feb 05, 2024",
+    status: 0,
+    personal: {
+      fullName: "Jemira",
+      aadhar: "XXXX-XXXX-9012",
+      gender: "Female",
+      nationality: "Indian",
+      email: "jemira@example.com",
+      phone: "+91 98765 43210",
+      address: "Sector 5, Hiranandani, Mumbai, MH - 400076"
+    },
+    academic: {
+      qualification: "12th Commerce",
+      score10: "95.2% (CBSE)",
+      score12: "97.5% (CBSE)",
+      entranceScore: "CUET Score: 795/800",
+      completionYear: "2023"
+    },
+    documents: [
+      { name: "Aadhar Card", status: "Verified", date: "Feb 06, 2024" },
+      { name: "10th Marksheet", status: "Verified", date: "Feb 06, 2024" },
+      { name: "12th Marksheet", status: "Under Review", date: "Feb 05, 2024" }
+    ]
   }
 };
 
@@ -60,12 +84,19 @@ const timelineSteps = [
   { title: "Fee Payment & Enrollment", status: "pending" }
 ];
 
-export default function ApplicationDetailPage() {
-  const { id } = useParams();
-  const app = APP_DETAILS[id as string] || APP_DETAILS["APP-IITB-101"];
+export async function generateStaticParams() {
+  return [
+    { id: 'APP-IITB-101' },
+    { id: 'APP-DU-502' }
+  ];
+}
+
+export default async function ApplicationDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const app = APP_DETAILS[id] || APP_DETAILS["APP-IITB-101"];
 
   return (
-    <div className="flex flex-col pt-12 min-h-screen bg-background">
+    <div className="flex flex-col pt-4 md:pt-12 min-h-screen bg-background">
       <div className="px-6 mb-8">
         <h2 className="text-xl font-bold">Admission Details</h2>
         <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">{app.id}</p>
@@ -99,7 +130,7 @@ export default function ApplicationDetailPage() {
           </div>
         </div>
 
-        <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.1s' }}>
+        <div className="space-y-4 animate-fade-in">
           <div className="flex items-center gap-2 px-2">
             <User size={18} className="text-primary" />
             <h4 className="font-bold text-lg">Identity Details</h4>
@@ -117,7 +148,7 @@ export default function ApplicationDetailPage() {
           </div>
         </div>
 
-        <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <div className="space-y-4 animate-fade-in">
           <div className="flex items-center gap-2 px-2">
             <BookOpen size={18} className="text-primary" />
             <h4 className="font-bold text-lg">Academic Scorecard</h4>
@@ -132,7 +163,7 @@ export default function ApplicationDetailPage() {
           </div>
         </div>
 
-        <div className="space-y-4 animate-fade-in" style={{ animationDelay: '0.3s' }}>
+        <div className="space-y-4 animate-fade-in">
           <div className="flex items-center gap-2 px-2">
             <FileText size={18} className="text-primary" />
             <h4 className="font-bold text-lg">Uploaded Certificates</h4>

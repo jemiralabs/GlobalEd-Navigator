@@ -1,54 +1,92 @@
-"use client";
-
-import { useParams, useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, MapPin, Star, Clock, DollarSign, CheckCircle2, Share2, Heart } from "lucide-react";
+import { MapPin, Star, Clock, CheckCircle2, Share2, Heart } from "lucide-react";
 import Link from "next/link";
 
 const UNIVERSITY_DATA: any = {
-  "1": {
-    name: "Stanford University",
-    location: "California, USA",
+  "iit-b": {
+    name: "IIT Bombay",
+    location: "Mumbai, India",
     rating: 4.9,
-    banner: "https://picsum.photos/seed/stan1/800/600",
-    overview: "Stanford University is a private research university in Stanford, California. It is ranked among the best universities in the world. Its 8,180-acre campus is one of the largest in the United States and is home to more than 17,000 students.",
+    banner: "https://picsum.photos/seed/iitb/800/600",
+    overview: "IIT Bombay is recognized worldwide as a leader in the field of engineering education and research. It is known for the outstanding calibre of students graduating from its undergraduate and postgraduate programmes.",
     courses: [
-      { name: "Computer Science", duration: "4 Years", fee: "$55,000/yr", eligibility: "SAT 1500+ / IELTS 7.5" },
-      { name: "Electrical Engineering", duration: "4 Years", fee: "$52,000/yr", eligibility: "SAT 1450+ / IELTS 7.0" }
+      { name: "Computer Science & Engineering", duration: "4 Years", fee: "₹2.2L/yr", eligibility: "JEE Advanced Rank < 100" },
+      { name: "Electrical Engineering", duration: "4 Years", fee: "₹2.2L/yr", eligibility: "JEE Advanced Rank < 500" }
     ],
-    admission: ["Personal Statement", "High School Transcripts", "Two Letters of Recommendation", "English Proficiency Scores"]
+    admission: ["JEE Advanced Scorecard", "Class 10th & 12th Marksheets", "Category Certificate (if any)", "Aadhar Card"]
   },
-  "2": {
-    name: "Oxford University",
-    location: "Oxford, UK",
+  "iim-a": {
+    name: "IIM Ahmedabad",
+    location: "Ahmedabad, India",
     rating: 5.0,
-    banner: "https://picsum.photos/seed/oxf1/800/600",
-    overview: "The University of Oxford is a collegiate research university in Oxford, England. There is evidence of teaching as early as 1096, making it the oldest university in the English-speaking world.",
+    banner: "https://picsum.photos/seed/iima/800/600",
+    overview: "IIM Ahmedabad is the premier management institute in India. It has been consistently ranked as the top business school in the country and is known for its rigorous academic curriculum and global impact.",
     courses: [
-      { name: "Economics & Management", duration: "3 Years", fee: "£35,000/yr", eligibility: "A*AA / IELTS 7.5" },
-      { name: "Law", duration: "3 Years", fee: "£32,000/yr", eligibility: "AAA / IELTS 7.5" }
+      { name: "MBA (PGP)", duration: "2 Years", fee: "₹12L/yr", eligibility: "CAT Percentile > 99.5 + Interview" },
+      { name: "MBA-FABM", duration: "2 Years", fee: "₹10L/yr", eligibility: "CAT Percentile > 98 + Interview" }
     ],
-    admission: ["Academic Excellence", "Thinking Skills Assessment", "Strong Motivation Statement", "Proof of English Skills"]
+    admission: ["CAT Scorecard", "Graduation Transcripts", "Work Experience Proof", "Academic References"]
+  },
+  "du-srcc": {
+    name: "SRCC, Delhi University",
+    location: "Delhi, India",
+    rating: 4.8,
+    banner: "https://picsum.photos/seed/srcc/800/600",
+    overview: "Shri Ram College of Commerce is a premier institute for commerce and economics education in India. Affiliated with the University of Delhi, it attracts the brightest minds from across the country.",
+    courses: [
+      { name: "B.Com (Honours)", duration: "3 Years", fee: "₹30K/yr", eligibility: "CUET Percentile > 99" },
+      { name: "B.A. Economics (Honours)", duration: "3 Years", fee: "₹30K/yr", eligibility: "CUET Percentile > 99" }
+    ],
+    admission: ["CUET Scorecard", "Class 12th Marksheet", "DU CSAS Portal Registration", "Character Certificate"]
+  },
+  "bits-p": {
+    name: "BITS Pilani",
+    location: "Pilani, India",
+    rating: 4.7,
+    banner: "https://picsum.photos/seed/bits/800/600",
+    overview: "BITS Pilani is a leading private deemed university known for its flexible academic system and strong industry connections. It offers a unique 'Practice School' program.",
+    courses: [
+      { name: "B.E. Computer Science", duration: "4 Years", fee: "₹5L/yr", eligibility: "BITSAT Score > 320" },
+      { name: "B.E. Mechanical", duration: "4 Years", fee: "₹5L/yr", eligibility: "BITSAT Score > 280" }
+    ],
+    admission: ["BITSAT Scorecard", "Class 12th Marksheet (min 75% in PCM)", "Aadhar Card"]
+  },
+  "aiims-d": {
+    name: "AIIMS Delhi",
+    location: "Delhi, India",
+    rating: 5.0,
+    banner: "https://picsum.photos/seed/aiims/800/600",
+    overview: "All India Institute of Medical Sciences, Delhi is the pinnacle of medical education and healthcare in India. It is a dream destination for every medical aspirant in the country.",
+    courses: [
+      { name: "MBBS", duration: "5.5 Years", fee: "₹1.6K/yr", eligibility: "NEET Rank < 50" },
+      { name: "B.Sc Nursing", duration: "4 Years", fee: "₹1K/yr", eligibility: "AIIMS Entrance Exam" }
+    ],
+    admission: ["NEET Scorecard", "Class 12th Marksheet (min 60% in PCB)", "Medical Fitness Certificate", "Aadhar Card"]
   }
 };
 
-export default function UniversityDetailPage() {
-  const { id } = useParams();
-  const router = useRouter();
-  const uni = UNIVERSITY_DATA[id as string] || UNIVERSITY_DATA["1"];
+export async function generateStaticParams() {
+  return [
+    { id: 'iit-b' },
+    { id: 'iim-a' },
+    { id: 'du-srcc' },
+    { id: 'bits-p' },
+    { id: 'aiims-d' }
+  ];
+}
+
+export default async function UniversityDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const uni = UNIVERSITY_DATA[id] || UNIVERSITY_DATA["iit-b"];
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* Banner */}
       <div className="relative h-72 w-full">
         <img src={uni.banner} alt={uni.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         
-        <div className="absolute top-12 left-6 right-6 flex justify-between">
-          <button onClick={() => router.back()} className="p-3 bg-white/20 backdrop-blur-md rounded-2xl text-white">
-            <ArrowLeft size={20} />
-          </button>
+        <div className="absolute top-4 left-6 right-6 flex justify-end">
           <div className="flex gap-2">
             <button className="p-3 bg-white/20 backdrop-blur-md rounded-2xl text-white">
               <Heart size={20} />
@@ -71,7 +109,6 @@ export default function UniversityDetailPage() {
         </div>
       </div>
 
-      {/* Tabs Content */}
       <div className="flex-1 px-6 pt-6 -mt-6 bg-white rounded-t-[2.5rem] shadow-2xl z-10">
         <Tabs defaultValue="overview" className="w-full">
           <TabsList className="w-full bg-secondary/30 rounded-2xl h-12 mb-6">
@@ -87,12 +124,12 @@ export default function UniversityDetailPage() {
             </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-background p-4 rounded-2xl border border-secondary">
-                <p className="text-[10px] text-muted-foreground uppercase font-bold mb-1">Students</p>
-                <p className="text-lg font-bold">17,000+</p>
+                <p className="text-[10px] text-muted-foreground uppercase font-bold mb-1">NIRF Rank</p>
+                <p className="text-lg font-bold">Top 5</p>
               </div>
               <div className="bg-background p-4 rounded-2xl border border-secondary">
                 <p className="text-[10px] text-muted-foreground uppercase font-bold mb-1">Acceptance</p>
-                <p className="text-lg font-bold">4.8%</p>
+                <p className="text-lg font-bold">Highly Competitive</p>
               </div>
             </div>
           </TabsContent>
@@ -107,10 +144,10 @@ export default function UniversityDetailPage() {
                       <Clock size={16} /> {course.duration}
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <DollarSign size={16} /> {course.fee}
+                      <span className="font-bold text-foreground">{course.fee}</span>
                     </div>
                     <div className="col-span-2 flex items-center gap-2 text-xs font-bold text-primary bg-primary/5 px-3 py-2 rounded-xl border border-primary/10">
-                      <CheckCircle2 size={14} /> Eligibility: {course.eligibility}
+                      <CheckCircle2 size={14} /> {course.eligibility}
                     </div>
                   </div>
                   <Link href="/apply">

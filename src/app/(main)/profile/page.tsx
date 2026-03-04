@@ -33,7 +33,7 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="flex flex-col pt-6 md:pt-12 pb-10">
+    <div className="flex flex-col pt-4 md:pt-12 pb-10">
       <div className="px-6 mb-8 flex flex-col items-center">
         <div className="relative mb-4">
           <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-4 border-white shadow-xl">
@@ -87,7 +87,6 @@ export default function ProfilePage() {
           ))}
         </div>
 
-        {/* Developer Credits Section */}
         <div className="bg-muted/30 rounded-3xl p-6 border border-secondary/40">
           <div className="flex items-center gap-2 mb-4 text-muted-foreground uppercase text-[10px] font-black tracking-widest">
             <Code size={14} /> Development Credits
