@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { 
   Home, 
   FileText, 
@@ -67,6 +67,7 @@ const mockNotifications = [
 
 export function TopNav() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export function TopNav() {
 
   const handleLogout = () => {
     localStorage.removeItem("userLoggedIn");
-    window.location.href = "/home";
+    router.push("/home");
   };
 
   return (

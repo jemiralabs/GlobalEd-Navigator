@@ -49,7 +49,7 @@ export default function MainLayout({
                 </div>
                 
                 <div className="text-xs text-muted-foreground">
-                  © 2024 GlobalEd Navigator. All rights reserved.
+                  © 2026 GlobalEd Navigator. All rights reserved.
                 </div>
               </div>
             </footer>

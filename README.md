@@ -27,11 +27,11 @@ This project was designed and crafted with ❤️ by **Jemira Labs**.
 
 ### Core Developers:
 
-- **Mudrika**
+- **Mudrika Variya**
   - [LinkedIn](https://www.linkedin.com/in/mudrika-variya/)
   - [GitHub](https://github.com/mudrika-variya)
 
-- **Jemira**
+- **Jemish Dhameliya**
   - [LinkedIn](https://www.linkedin.com/in/jemish-dhameliya/)
   - [GitHub](https://github.com/jemysh007)
 
