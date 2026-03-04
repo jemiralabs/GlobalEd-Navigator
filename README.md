@@ -35,7 +35,7 @@ This project was designed and crafted with ❤️ by **Jemira Labs**.
 
 ### Core Developers:
 
-- **Mudrika Variya**
+- **Mudrika**
   - [LinkedIn](https://www.linkedin.com/in/mudrika-variya/)
   - [GitHub](https://github.com/mudrika-variya)
 

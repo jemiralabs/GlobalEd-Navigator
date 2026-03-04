@@ -32,15 +32,15 @@ export function BottomNav() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex flex-col items-center gap-1 transition-all duration-300",
+                "flex flex-col items-center gap-1",
                 isActive ? "text-primary" : "text-muted-foreground"
               )}
             >
               <div className={cn(
-                "p-2 rounded-xl transition-all",
+                "p-2 rounded-xl transition-colors duration-200",
                 isActive ? "bg-primary/10" : "bg-transparent"
               )}>
-                <item.icon size={22} strokeWidth={isActive ? 2.5 : 2} />
+                <item.icon size={22} strokeWidth={2} />
               </div>
               <span className="text-[9px] font-black uppercase tracking-wider">{item.label}</span>
             </Link>
