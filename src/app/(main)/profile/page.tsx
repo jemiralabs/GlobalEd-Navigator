@@ -1,7 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { User, Bell, Shield, LogOut, ChevronRight, GraduationCap, Heart, MessageSquare, Camera } from "lucide-react";
+import { 
+  User, 
+  Bell, 
+  Shield, 
+  LogOut, 
+  ChevronRight, 
+  GraduationCap, 
+  Heart, 
+  MessageSquare, 
+  Camera,
+  Linkedin,
+  Code
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -21,13 +33,12 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="flex flex-col pt-12 pb-10">
+    <div className="flex flex-col pt-6 md:pt-12 pb-10">
       <div className="px-6 mb-8 flex flex-col items-center">
         <div className="relative mb-4">
           <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-4 border-white shadow-xl">
             <img src="https://picsum.photos/seed/user1/200/200" alt="Profile" />
           </div>
-          {/* Upload New Image Logo (Camera) */}
           <div className="absolute -bottom-2 -right-2 bg-primary text-white p-2.5 rounded-xl shadow-lg border-2 border-white cursor-pointer hover:bg-primary/90 transition-colors">
             <Camera size={16} />
           </div>
@@ -36,7 +47,7 @@ export default function ProfilePage() {
         <p className="text-muted-foreground text-sm font-medium">B.Tech Student • India</p>
       </div>
 
-      <div className="px-6 space-y-4">
+      <div className="px-6 space-y-6">
         <div className="bg-white rounded-3xl p-6 flex justify-around shadow-sm border border-secondary/20">
           <Link href="/applications" className="text-center group">
             <p className="text-xl font-bold text-primary group-active:scale-95 transition-transform">2</p>
@@ -74,6 +85,47 @@ export default function ProfilePage() {
               <ChevronRight size={18} className="text-muted-foreground" />
             </Link>
           ))}
+        </div>
+
+        {/* Developer Credits Section */}
+        <div className="bg-muted/30 rounded-3xl p-6 border border-secondary/40">
+          <div className="flex items-center gap-2 mb-4 text-muted-foreground uppercase text-[10px] font-black tracking-widest">
+            <Code size={14} /> Development Credits
+          </div>
+          <div className="space-y-4">
+            <Link 
+              href="https://www.linkedin.com/in/mudrika-variya/" 
+              target="_blank" 
+              className="flex items-center justify-between p-3 bg-white rounded-2xl hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Linkedin size={14} className="text-primary" />
+                </div>
+                <span className="text-sm font-bold">Mudrika Variya</span>
+              </div>
+              <ChevronRight size={14} className="text-muted-foreground" />
+            </Link>
+            
+            <Link 
+              href="https://www.linkedin.com/in/jemish-dhameliya/" 
+              target="_blank" 
+              className="flex items-center justify-between p-3 bg-white rounded-2xl hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <Linkedin size={14} className="text-primary" />
+                </div>
+                <span className="text-sm font-bold">Jemish Dhameliya</span>
+              </div>
+              <ChevronRight size={14} className="text-muted-foreground" />
+            </Link>
+          </div>
+          <div className="mt-6 text-center">
+            <Link href="https://jemira.in" target="_blank" className="text-[10px] font-black text-primary uppercase hover:underline">
+              By Jemira Labs
+            </Link>
+          </div>
         </div>
 
         <Button 
