@@ -1,13 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { ArrowLeft, MessageSquare, User, Calendar, CheckCircle2, Loader2, Sparkles } from "lucide-react";
+import { MessageSquare, User, Calendar, CheckCircle2, Loader2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
 export default function CounselingPage() {
-  const router = useRouter();
   const [isBooking, setIsBooking] = useState(false);
 
   const sessions = [
@@ -42,14 +40,9 @@ export default function CounselingPage() {
 
   return (
     <div className="flex flex-col pt-12 min-h-screen bg-background">
-      <div className="px-6 flex items-center gap-4 mb-8">
-        <button onClick={() => router.back()} className="p-3 bg-white rounded-2xl shadow-sm text-primary border border-secondary">
-          <ArrowLeft size={20} />
-        </button>
-        <div>
-          <h2 className="text-xl font-bold">Expert Counseling</h2>
-          <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">1-on-1 Guidance</p>
-        </div>
+      <div className="px-6 mb-8">
+        <h2 className="text-xl font-bold">Expert Counseling</h2>
+        <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">1-on-1 Guidance</p>
       </div>
 
       <div className="px-6 space-y-6 pb-24">

@@ -93,7 +93,6 @@ export function TopNav() {
           <div className="flex items-center gap-1">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
-              // Hide private links if not logged in
               if (!isLoggedIn && (item.href === "/applications" || item.href === "/profile/counseling")) return null;
               return (
                 <Link

@@ -1,14 +1,12 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { 
-  ArrowLeft, 
   User, 
   GraduationCap, 
   FileText, 
   CheckCircle2, 
-  Clock, 
   Calendar, 
   MapPin, 
   Phone, 
@@ -64,22 +62,13 @@ const timelineSteps = [
 
 export default function ApplicationDetailPage() {
   const { id } = useParams();
-  const router = useRouter();
   const app = APP_DETAILS[id as string] || APP_DETAILS["APP-IITB-101"];
 
   return (
     <div className="flex flex-col pt-12 min-h-screen bg-background">
-      <div className="px-6 flex items-center gap-4 mb-8">
-        <button 
-          onClick={() => router.back()} 
-          className="p-3 bg-white rounded-2xl shadow-sm text-primary hover:scale-105 transition-transform border border-secondary"
-        >
-          <ArrowLeft size={20} />
-        </button>
-        <div>
-          <h2 className="text-xl font-bold">Admission Details</h2>
-          <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">{app.id}</p>
-        </div>
+      <div className="px-6 mb-8">
+        <h2 className="text-xl font-bold">Admission Details</h2>
+        <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">{app.id}</p>
       </div>
 
       <div className="flex-1 px-6 pb-24 space-y-6">

@@ -1,8 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { 
-  ArrowLeft, 
   PhoneCall, 
   Mail, 
   MessageSquare, 
@@ -15,8 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function HelpDeskPage() {
-  const router = useRouter();
-
   const contactMethods = [
     {
       icon: <PhoneCall className="text-primary" />,
@@ -43,17 +39,9 @@ export default function HelpDeskPage() {
 
   return (
     <div className="flex flex-col pt-12 min-h-screen bg-background">
-      <div className="px-6 flex items-center gap-4 mb-8">
-        <button 
-          onClick={() => router.back()} 
-          className="p-3 bg-white rounded-2xl shadow-sm text-primary border border-secondary"
-        >
-          <ArrowLeft size={20} />
-        </button>
-        <div>
-          <h2 className="text-xl font-bold">Help Desk</h2>
-          <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Support Center</p>
-        </div>
+      <div className="px-6 mb-8">
+        <h2 className="text-xl font-bold">Help Desk</h2>
+        <p className="text-[10px] uppercase font-black text-muted-foreground tracking-widest">Support Center</p>
       </div>
 
       <div className="flex-1 px-6 pb-20 space-y-6">
