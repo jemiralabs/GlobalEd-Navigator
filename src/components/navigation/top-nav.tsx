@@ -25,9 +25,9 @@ const navItems = [
 const mockNotifications = [
   {
     id: 1,
-    title: "Application Verified",
-    desc: "Your 10th marksheet for IIT Bombay has been verified.",
-    time: "2h ago",
+    title: "Aadhar Verified",
+    desc: "Your Aadhar card verification for IIT Bombay application is successful.",
+    time: "45m ago",
     icon: CheckCircle2,
     color: "text-green-500",
     bg: "bg-green-50"
@@ -35,20 +35,29 @@ const mockNotifications = [
   {
     id: 2,
     title: "New Merit List",
-    desc: "SRCC has released the first merit list for B.Com (Hons).",
-    time: "5h ago",
+    desc: "SRCC has released the first merit list for B.Com (Hons) 2024.",
+    time: "3h ago",
     icon: Info,
     color: "text-blue-500",
     bg: "bg-blue-50"
   },
   {
     id: 3,
-    title: "Document Required",
-    desc: "Please re-upload your clear Aadhar card scan for AIIMS.",
+    title: "Fee Payment Alert",
+    desc: "Last date for counseling fee payment for NIT Trichy is tomorrow.",
     time: "1d ago",
     icon: AlertCircle,
     color: "text-orange-500",
     bg: "bg-orange-50"
+  },
+  {
+    id: 4,
+    title: "Document Re-upload",
+    desc: "Your 12th marksheet scan is blurry. Please re-upload for IIM Indore.",
+    time: "2d ago",
+    icon: FileText,
+    color: "text-red-500",
+    bg: "bg-red-50"
   }
 ];
 
@@ -91,14 +100,14 @@ export function TopNav() {
         <div className="flex items-center gap-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground relative">
+              <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground relative hover:bg-secondary">
                 <Bell size={20} />
                 <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-80 mt-2 rounded-2xl p-0 overflow-hidden" align="end">
+            <DropdownMenuContent className="w-80 mt-2 rounded-2xl p-0 overflow-hidden shadow-2xl border-secondary" align="end">
               <div className="p-4 border-b bg-secondary/10 flex justify-between items-center">
-                <h4 className="font-bold text-sm">Notifications</h4>
+                <h4 className="font-bold text-sm">Admissions Alerts</h4>
                 <Link href="/profile/notifications" className="text-[10px] font-black text-primary uppercase hover:underline">View All</Link>
               </div>
               <ScrollArea className="h-80">
@@ -106,13 +115,13 @@ export function TopNav() {
                   {mockNotifications.map((notif) => (
                     <div key={notif.id} className="p-4 border-b last:border-0 hover:bg-secondary/5 transition-colors cursor-pointer">
                       <div className="flex gap-3">
-                        <div className={cn("p-2 rounded-xl h-fit", notif.bg, notif.color)}>
+                        <div className={cn("p-2 rounded-xl h-fit shrink-0", notif.bg, notif.color)}>
                           <notif.icon size={16} />
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <div className="flex justify-between items-start mb-0.5">
-                            <h5 className="font-bold text-xs">{notif.title}</h5>
-                            <span className="text-[9px] text-muted-foreground">{notif.time}</span>
+                            <h5 className="font-bold text-[11px] truncate pr-2">{notif.title}</h5>
+                            <span className="text-[9px] text-muted-foreground whitespace-nowrap">{notif.time}</span>
                           </div>
                           <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2">{notif.desc}</p>
                         </div>
@@ -121,19 +130,24 @@ export function TopNav() {
                   ))}
                 </div>
               </ScrollArea>
+              <div className="p-3 bg-secondary/5 text-center border-t">
+                 <Link href="/profile/notifications" className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest hover:text-primary">
+                   Mark all as read
+                 </Link>
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-10 w-10 rounded-full border-2 border-white shadow-sm">
+              <Button variant="ghost" className="relative h-10 w-10 rounded-full border-2 border-white shadow-sm hover:scale-105 transition-transform">
                 <Avatar className="h-9 w-9">
                   <AvatarImage src="https://picsum.photos/seed/user1/100/100" alt="User" />
                   <AvatarFallback>JM</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 mt-2 rounded-2xl p-2" align="end" forceMount>
+            <DropdownMenuContent className="w-56 mt-2 rounded-2xl p-2 shadow-2xl border-secondary" align="end" forceMount>
               <DropdownMenuLabel className="font-normal p-4">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-bold leading-none">Jemish Macwan</p>

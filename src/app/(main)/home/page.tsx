@@ -10,12 +10,11 @@ import {
   GraduationCap, 
   ArrowRight, 
   MessageCircle, 
-  FileText, 
-  Sparkles,
   SlidersHorizontal,
   CheckCircle2,
   BookOpen,
-  X
+  X,
+  Bell
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -69,14 +68,16 @@ const universities = [
     stream: "Engineering",
     type: "UG/PG",
     image: "https://picsum.photos/seed/bits/600/400"
+  },
+  {
+    id: "aiims-d",
+    name: "AIIMS Delhi",
+    location: "Delhi",
+    rating: 5.0,
+    stream: "Medical",
+    type: "UG/PG",
+    image: "https://picsum.photos/seed/aiims/600/400"
   }
-];
-
-const quickActions = [
-  { label: "My Apps", icon: FileText, color: "bg-orange-50 text-orange-600", href: "/applications" },
-  { label: "Counseling", icon: MessageCircle, color: "bg-purple-50 text-purple-600", href: "/profile/counseling" },
-  { label: "Education", icon: GraduationCap, color: "bg-blue-50 text-blue-600", href: "/profile/education" },
-  { label: "AI Tips", icon: Sparkles, color: "bg-green-50 text-green-600", href: "/apply" }
 ];
 
 export default function HomePage() {
@@ -107,9 +108,15 @@ export default function HomePage() {
           </h2>
           <p className="text-muted-foreground text-sm font-medium italic">Phase 1 Admissions are Live!</p>
         </div>
-        <Link href="/profile" className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-white shadow-lg">
-          <img src="https://picsum.photos/seed/user1/100/100" alt="Avatar" className="w-full h-full object-cover" />
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/profile/notifications" className="relative p-2 bg-white rounded-xl shadow-sm border border-secondary md:hidden">
+            <Bell size={20} className="text-muted-foreground" />
+            <span className="absolute top-1 right-1 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+          </Link>
+          <Link href="/profile" className="w-12 h-12 rounded-2xl overflow-hidden border-2 border-white shadow-lg">
+            <img src="https://picsum.photos/seed/user1/100/100" alt="Avatar" className="w-full h-full object-cover" />
+          </Link>
+        </div>
       </div>
 
       {/* Hero Search Section */}
@@ -164,7 +171,7 @@ export default function HomePage() {
                       <BookOpen size={16} /> Stream
                     </div>
                     <RadioGroup value={selectedStream} onValueChange={setSelectedStream} className="grid grid-cols-1 gap-3">
-                      {["all", "Engineering", "Management", "Commerce"].map((s) => (
+                      {["all", "Engineering", "Management", "Commerce", "Medical"].map((s) => (
                         <Label key={s} className={cn(
                           "flex items-center justify-between p-4 rounded-2xl border-2 transition-all cursor-pointer",
                           selectedStream === s ? "border-primary bg-primary/5" : "border-secondary"
@@ -203,18 +210,6 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* Quick Actions Grid */}
-      <div className="px-6 mb-10 grid grid-cols-4 gap-4">
-        {quickActions.map((action, idx) => (
-          <Link key={idx} href={action.href} className="flex flex-col items-center gap-2">
-            <div className={`${action.color} p-4 rounded-2xl shadow-sm hover:scale-105 transition-transform`}>
-              <action.icon size={24} />
-            </div>
-            <span className="text-[10px] font-bold text-center leading-tight uppercase tracking-tighter">{action.label}</span>
-          </Link>
-        ))}
-      </div>
-
       {/* Featured NIRF Ranked Section */}
       <div className="mb-10">
         <div className="px-6 flex justify-between items-center mb-6">
@@ -226,7 +221,7 @@ export default function HomePage() {
         </div>
         
         <div className="flex overflow-x-auto gap-5 px-6 pb-6 no-scrollbar">
-          {(searchQuery || selectedType !== "all" || selectedStream !== "all" ? filteredUniversities : universities).map((uni) => (
+          {filteredUniversities.map((uni) => (
             <Link key={uni.id} href={`/universities/${uni.id}`} className="min-w-[280px] bg-white rounded-[2rem] overflow-hidden shadow-lg shadow-black/[0.02] border border-secondary/50 group">
               <div className="relative h-36">
                 <img src={uni.image} alt={uni.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
