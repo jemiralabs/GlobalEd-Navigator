@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Search, FileText, MessageCircle, User, GraduationCap, LogOut, Bell } from "lucide-react";
+import { Home, FileText, MessageCircle, User, GraduationCap, LogOut, Bell, CheckCircle2, Info, AlertCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,12 +14,42 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const navItems = [
-  { label: "Dashboard", icon: Home, href: "/home" },
-  { label: "Universities", icon: Search, href: "/universities" },
+  { label: "Home", icon: Home, href: "/home" },
   { label: "Applications", icon: FileText, href: "/applications" },
   { label: "Counseling", icon: MessageCircle, href: "/profile/counseling" },
+];
+
+const mockNotifications = [
+  {
+    id: 1,
+    title: "Application Verified",
+    desc: "Your 10th marksheet for IIT Bombay has been verified.",
+    time: "2h ago",
+    icon: CheckCircle2,
+    color: "text-green-500",
+    bg: "bg-green-50"
+  },
+  {
+    id: 2,
+    title: "New Merit List",
+    desc: "SRCC has released the first merit list for B.Com (Hons).",
+    time: "5h ago",
+    icon: Info,
+    color: "text-blue-500",
+    bg: "bg-blue-50"
+  },
+  {
+    id: 3,
+    title: "Document Required",
+    desc: "Please re-upload your clear Aadhar card scan for AIIMS.",
+    time: "1d ago",
+    icon: AlertCircle,
+    color: "text-orange-500",
+    bg: "bg-orange-50"
+  }
 ];
 
 export function TopNav() {
@@ -59,10 +89,40 @@ export function TopNav() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground relative">
-            <Bell size={20} />
-            <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground relative">
+                <Bell size={20} />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-80 mt-2 rounded-2xl p-0 overflow-hidden" align="end">
+              <div className="p-4 border-b bg-secondary/10 flex justify-between items-center">
+                <h4 className="font-bold text-sm">Notifications</h4>
+                <Link href="/profile/notifications" className="text-[10px] font-black text-primary uppercase hover:underline">View All</Link>
+              </div>
+              <ScrollArea className="h-80">
+                <div className="flex flex-col">
+                  {mockNotifications.map((notif) => (
+                    <div key={notif.id} className="p-4 border-b last:border-0 hover:bg-secondary/5 transition-colors cursor-pointer">
+                      <div className="flex gap-3">
+                        <div className={cn("p-2 rounded-xl h-fit", notif.bg, notif.color)}>
+                          <notif.icon size={16} />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-start mb-0.5">
+                            <h5 className="font-bold text-xs">{notif.title}</h5>
+                            <span className="text-[9px] text-muted-foreground">{notif.time}</span>
+                          </div>
+                          <p className="text-[11px] text-muted-foreground leading-snug line-clamp-2">{notif.desc}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </DropdownMenuContent>
+          </DropdownMenu>
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -87,8 +147,8 @@ export function TopNav() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild className="rounded-xl cursor-pointer py-2.5">
-                <Link href="/profile/notifications" className="flex items-center gap-2">
-                  <Bell size={16} /> Notifications
+                <Link href="/profile/favorites" className="flex items-center gap-2">
+                  <Bell size={16} /> Favorites
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
