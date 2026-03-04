@@ -18,7 +18,6 @@ import {
   Fingerprint
 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { DocumentGuidanceCard } from "@/components/ai/document-guidance-card";
 import { cn } from "@/lib/utils";
 
 export default function ApplicationForm() {
@@ -171,8 +170,6 @@ export default function ApplicationForm() {
           <div className="space-y-6 animate-fade-in">
             <h3 className="text-lg font-bold">Document Verification</h3>
             
-            <DocumentGuidanceCard docType="Graduation Marksheets" />
-
             <div className="grid grid-cols-1 gap-4 pt-2">
               {[
                 { label: "Aadhar Card", sub: "Front & Back scan" },
