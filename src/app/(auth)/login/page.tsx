@@ -34,6 +34,7 @@ export default function LoginPage() {
       <div className="auth-card p-8 md:p-10">
         <div className="flex justify-between items-center mb-8">
           <button 
+            type="button"
             onClick={() => router.push("/home")} 
             className="p-2 bg-secondary/50 rounded-full text-muted-foreground hover:text-primary transition-colors"
           >
@@ -46,10 +47,10 @@ export default function LoginPage() {
 
         <div className="text-center mb-10">
           <h2 className="text-3xl font-bold text-foreground mb-1">Welcome Back</h2>
-          <p className="text-muted-foreground">Enter details to access your portal</p>
+          <p className="text-muted-foreground text-sm">Enter details to access your portal</p>
         </div>
 
-        <form onSubmit={handleLogin} className="flex flex-col gap-6">
+        <form onSubmit={handleLogin} className="flex flex-col gap-6 flex-1 md:flex-none">
           <div className="space-y-2">
             <Label htmlFor="email" className="text-xs uppercase font-bold text-muted-foreground ml-1">Email Address</Label>
             <Input
@@ -97,16 +98,16 @@ export default function LoginPage() {
           >
             {loading ? <Loader2 className="animate-spin mr-2" /> : "Login to Portal"}
           </Button>
-        </form>
 
-        <div className="mt-12 text-center">
-          <p className="text-muted-foreground text-sm">
-            New applicant?{" "}
-            <Link href="/register" className="text-primary font-black hover:underline uppercase text-xs">
-              Create Account
-            </Link>
-          </p>
-        </div>
+          <div className="mt-auto md:mt-12 text-center pb-8 md:pb-0">
+            <p className="text-muted-foreground text-sm">
+              New applicant?{" "}
+              <Link href="/register" className="text-primary font-black hover:underline uppercase text-xs">
+                Create Account
+              </Link>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   );

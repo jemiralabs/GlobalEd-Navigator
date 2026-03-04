@@ -54,11 +54,13 @@
 }
 
 .auth-wrapper {
-  @apply min-h-screen flex items-center justify-center bg-background md:bg-muted/20 p-6;
+  /* Mobile: No padding, starts at top. Desktop: Centered with padding */
+  @apply min-h-screen flex flex-col items-stretch justify-start bg-white md:bg-muted/20 md:p-6 md:items-center md:justify-center;
 }
 
 .auth-card {
-  @apply w-full max-w-md bg-white rounded-[2.5rem] shadow-2xl md:shadow-xl border border-secondary flex flex-col;
+  /* Mobile: Full screen, no radius, no shadow. Desktop: Card style */
+  @apply w-full flex-1 bg-white flex flex-col md:flex-none md:max-w-md md:rounded-[2.5rem] md:shadow-2xl md:border md:border-secondary md:min-h-0 overflow-hidden;
 }
 
 .no-scrollbar::-webkit-scrollbar {

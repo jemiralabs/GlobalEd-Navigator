@@ -40,9 +40,10 @@ export default function RegisterPage() {
 
   return (
     <div className="auth-wrapper">
-      <div className="auth-card max-h-[90vh]">
+      <div className="auth-card">
         <div className="p-8 pb-4 flex items-center justify-between border-b border-secondary">
           <button 
+            type="button"
             onClick={() => router.back()} 
             className="p-2 bg-secondary/50 rounded-full text-muted-foreground"
           >
@@ -52,7 +53,7 @@ export default function RegisterPage() {
           <div className="w-9" /> {/* Spacer */}
         </div>
 
-        <ScrollArea className="flex-1 px-8 py-6">
+        <ScrollArea className="flex-1 px-8 py-6 md:max-h-[70vh]">
           <div className="flex flex-col items-center mb-8">
             <div className="bg-primary/10 p-4 rounded-3xl mb-4">
               <GraduationCap className="w-8 h-8 text-primary" />
