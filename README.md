@@ -29,12 +29,19 @@ GlobalEd Navigator is a comprehensive centralized admission portal designed spec
 - `src/hooks`: Custom React hooks for state and UI management.
 - `src/lib`: Utility functions and placeholder data.
 
-## 🏁 Getting Started
+## 🤝 Developed By
 
-1. **Explore**: Roam the home screen as a guest to discover universities.
-2. **Apply**: Create a student account to start your centralized admission journey.
-3. **Track**: Monitor your "Applications" tab for status updates and merit lists.
-4. **Consult**: Visit the "Counseling" section if you need expert help with your career path.
+This project was designed and crafted with ❤️ by **Jemira Labs**.
+
+### Core Developers:
+
+- **Mudrika Variya**
+  - [LinkedIn](https://www.linkedin.com/in/mudrika-variya/)
+  - [GitHub](https://github.com/mudrika-variya)
+
+- **Jemish Dhameliya**
+  - [LinkedIn](https://www.linkedin.com/in/jemish-dhameliya/)
+  - [GitHub](https://github.com/jemysh007)
 
 ---
-Built with ❤️ for the next generation of Indian scholars.
+Built for the next generation of Indian scholars. [Jemira.in](https://jemira.in)
