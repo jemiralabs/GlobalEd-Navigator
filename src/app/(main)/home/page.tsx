@@ -93,6 +93,12 @@ export default function HomePage() {
     setIsLoggedIn(loggedIn);
   }, []);
 
+  const resetFilters = () => {
+    setSearchQuery("");
+    setSelectedType("all");
+    setSelectedStream("all");
+  };
+
   const filteredUniversities = useMemo(() => {
     return universities.filter((uni) => {
       const matchesSearch = uni.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -116,7 +122,7 @@ export default function HomePage() {
           <p className="text-muted-foreground text-sm font-medium italic">Phase 1 Admissions are Live!</p>
         </div>
         <div className="flex items-center gap-3">
-          {isLoggedIn ? (
+          {isLoggedIn && (
             <>
               <Link href="/profile/notifications" className="relative p-2 bg-white rounded-xl shadow-sm border border-secondary md:hidden">
                 <Bell size={20} className="text-muted-foreground" />
@@ -126,12 +132,6 @@ export default function HomePage() {
                 <img src="https://picsum.photos/seed/user1/100/100" alt="Avatar" className="w-full h-full object-cover" />
               </Link>
             </>
-          ) : (
-            <Link href="/login">
-              <Button variant="outline" className="rounded-xl border-primary text-primary font-bold h-12 px-5">
-                <LogIn size={18} className="mr-2" /> Login
-              </Button>
-            </Link>
           )}
         </div>
       </div>
@@ -234,7 +234,12 @@ export default function HomePage() {
             <h3 className="text-xl font-bold">Top NIRF Ranked</h3>
             <p className="text-[10px] text-muted-foreground uppercase font-black tracking-widest">Premium Institutes 2024</p>
           </div>
-          <p className="text-primary text-sm font-bold opacity-50">View All</p>
+          <button 
+            onClick={resetFilters}
+            className="text-primary text-sm font-bold hover:underline"
+          >
+            View All
+          </button>
         </div>
         
         <div className="flex overflow-x-auto gap-5 px-6 pb-6 no-scrollbar">

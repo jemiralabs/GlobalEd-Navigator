@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import './globals.css';
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: 'GlobalEd Navigator',
@@ -22,6 +23,7 @@ export default function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
+        <Toaster />
       </body>
     </html>
   );
