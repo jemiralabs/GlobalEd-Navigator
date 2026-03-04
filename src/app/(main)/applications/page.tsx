@@ -36,7 +36,7 @@ const steps = [
 
 export default function ApplicationsPage() {
   return (
-    <div className="flex flex-col pt-12">
+    <div className="flex flex-col pt-6 md:pt-12">
       <div className="px-6 mb-8">
         <h2 className="text-2xl font-bold text-foreground">Admission Status</h2>
         <p className="text-muted-foreground text-sm">Track your Centralized Admissions progress</p>

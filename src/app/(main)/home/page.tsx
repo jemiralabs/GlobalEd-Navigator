@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
@@ -163,7 +162,7 @@ export default function HomePage() {
   const activeFiltersCount = (selectedType !== "all" ? 1 : 0) + (selectedStream !== "all" ? 1 : 0);
 
   return (
-    <div className="flex flex-col pt-12">
+    <div className="flex flex-col pt-6 md:pt-12">
       {/* Header */}
       <div className="px-6 mb-8 flex justify-between items-center">
         <div>
