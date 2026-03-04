@@ -39,7 +39,7 @@ This project was designed and crafted with ❤️ by **Jemira Labs**.
   - [LinkedIn](https://www.linkedin.com/in/mudrika-variya/)
   - [GitHub](https://github.com/mudrika-variya)
 
-- **Jemish Dhameliya**
+- **Jemira**
   - [LinkedIn](https://www.linkedin.com/in/jemish-dhameliya/)
   - [GitHub](https://github.com/jemysh007)
 

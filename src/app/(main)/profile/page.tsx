@@ -116,7 +116,7 @@ export default function ProfilePage() {
                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
                   <Linkedin size={14} className="text-primary" />
                 </div>
-                <span className="text-sm font-bold">Jemish Dhameliya</span>
+                <span className="text-sm font-bold">Jemira</span>
               </div>
               <ChevronRight size={14} className="text-muted-foreground" />
             </Link>
