@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --background: 208 50% 93%;
+    --background: 210 20% 98%;
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 214 84% 56%;
+    --primary: 214 82% 56%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 208 40% 90%;
+    --secondary: 210 20% 94%;
     --secondary-foreground: 222 47% 11%;
-    --muted: 210 40% 96.1%;
+    --muted: 210 20% 96%;
     --muted-foreground: 215.4 16.3% 46.9%;
     --accent: 194 100% 70%;
     --accent-foreground: 222 47% 11%;
@@ -22,8 +22,8 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 214 84% 56%;
-    --radius: 1rem;
+    --ring: 214 82% 56%;
+    --radius: 1.25rem;
   }
 }
 
@@ -41,5 +41,22 @@
 }
 
 .mobile-container {
-  @apply max-w-md mx-auto min-h-screen bg-background relative overflow-hidden;
+  @apply max-w-md mx-auto min-h-screen bg-background relative overflow-hidden shadow-2xl;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-progress {
+  animation: progress 1.5s ease-in-out forwards;
 }
