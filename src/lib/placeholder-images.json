@@ -1,3 +1,34 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "splash-logo",
+      "description": "GlobalEd Navigator Logo",
+      "imageUrl": "https://picsum.photos/seed/edu1/200/200",
+      "imageHint": "education graduation"
+    },
+    {
+      "id": "uni-1",
+      "description": "Stanford University",
+      "imageUrl": "https://images.unsplash.com/photo-1590579491624-f98f36d4c763?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx1bml2ZXJzaXR5JTIwY2FtcHVzfGVufDB8fHx8MTc3MjUzMzc3Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "university campus"
+    },
+    {
+      "id": "uni-2",
+      "description": "University of Oxford",
+      "imageUrl": "https://picsum.photos/seed/oxf1/600/400",
+      "imageHint": "oxford building"
+    },
+    {
+      "id": "uni-3",
+      "description": "MIT",
+      "imageUrl": "https://picsum.photos/seed/mit1/600/400",
+      "imageHint": "modern university"
+    },
+    {
+      "id": "hero-bg",
+      "description": "Global Education Banner",
+      "imageUrl": "https://picsum.photos/seed/hero/800/400",
+      "imageHint": "world map students"
+    }
+  ]
 }
