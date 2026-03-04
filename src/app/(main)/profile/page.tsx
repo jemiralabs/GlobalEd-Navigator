@@ -1,8 +1,7 @@
-
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { User, Settings, Bell, Shield, LogOut, ChevronRight, GraduationCap, Heart, MessageSquare } from "lucide-react";
+import { User, Bell, Shield, LogOut, ChevronRight, GraduationCap, Heart, MessageSquare, Camera } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -28,8 +27,8 @@ export default function ProfilePage() {
           <div className="w-24 h-24 rounded-[2rem] overflow-hidden border-4 border-white shadow-xl">
             <img src="https://picsum.photos/seed/user1/200/200" alt="Profile" />
           </div>
-          <div className="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-xl shadow-lg border-2 border-white">
-            <Settings size={14} />
+          <div className="absolute -bottom-2 -right-2 bg-primary text-white p-2 rounded-xl shadow-lg border-2 border-white cursor-pointer hover:bg-primary/90 transition-colors">
+            <Camera size={14} />
           </div>
         </div>
         <h2 className="text-2xl font-bold">Jemira</h2>
