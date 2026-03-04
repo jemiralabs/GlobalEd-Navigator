@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Home, Search, FileText, User, GraduationCap, LogOut, MessageCircle, Heart, Bell } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 import {
@@ -32,6 +32,12 @@ const profileItems = [
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    localStorage.removeItem("userLoggedIn");
+    router.push("/");
+  };
 
   return (
     <Sidebar className="hidden md:flex border-r border-secondary/50 bg-white">
@@ -88,11 +94,12 @@ export function AppSidebar() {
       <SidebarFooter className="p-6">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild className="h-12 rounded-xl text-destructive hover:bg-destructive/5 hover:text-destructive">
-              <Link href="/login" className="flex items-center gap-3">
-                <LogOut size={20} />
-                <span className="font-bold">Logout</span>
-              </Link>
+            <SidebarMenuButton 
+              onClick={handleLogout}
+              className="h-12 rounded-xl text-destructive hover:bg-destructive/5 hover:text-destructive"
+            >
+              <LogOut size={20} />
+              <span className="font-bold">Logout</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

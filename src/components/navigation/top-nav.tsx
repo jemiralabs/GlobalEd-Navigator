@@ -77,7 +77,7 @@ export function TopNav() {
 
   const handleLogout = () => {
     localStorage.removeItem("userLoggedIn");
-    router.push("/home");
+    router.push("/");
   };
 
   return (
