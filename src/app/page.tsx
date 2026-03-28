@@ -12,15 +12,15 @@ export default function SplashScreen() {
     const timer = setTimeout(() => {
       setIsVisible(false);
       // Change redirect to /home to allow guest roaming
-      setTimeout(() => router.push("/home"), 500);
-    }, 2500);
+      setTimeout(() => router.push("/home"), 250);
+    }, 1250);
 
     return () => clearTimeout(timer);
   }, [router]);
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-primary transition-opacity duration-500 ${
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-primary transition-opacity duration-[250ms] ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
